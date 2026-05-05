@@ -24,15 +24,19 @@ const services = [
   { n: "04", title: "Branding", body: "Wordmarks and full identity systems for small studios and shops.", dot: "bg-navy" },
 ];
 
+const PALETTE = [
+  { bg: "bg-maroon", color: "var(--maroon)" },
+  { bg: "bg-amber", color: "var(--amber)" },
+  { bg: "bg-mint", color: "var(--mint)" },
+  { bg: "bg-navy", color: "var(--navy)" },
+  { bg: "bg-pink", color: "var(--pink)" },
+  { bg: "bg-forest", color: "var(--forest)" },
+  { bg: "bg-accent-sun", color: "var(--accent-sun)" },
+];
+
 function Index() {
-  const [activeSwatches, setActiveSwatches] = useState<Set<number>>(new Set());
-  const toggleSwatch = (i: number) =>
-    setActiveSwatches((prev) => {
-      const next = new Set(prev);
-      if (next.has(i)) next.delete(i);
-      else next.add(i);
-      return next;
-    });
+  const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  const accent = activeIdx !== null ? PALETTE[activeIdx].color : "var(--accent-tomato)";
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -59,19 +63,28 @@ function Index() {
 
       {/* ───── Hero ───── */}
       <section id="top" className="hairline-b relative overflow-hidden">
-        <div className="pointer-events-none absolute right-40 top-40 hidden h-3 w-3 rounded-full bg-accent-tomato lg:block" />
+        <div
+          className="pointer-events-none absolute right-40 top-40 hidden h-3 w-3 rounded-full transition-colors duration-300 lg:block"
+          style={{ backgroundColor: accent }}
+        />
         <div className="pointer-events-none absolute left-[42%] top-24 hidden h-2 w-2 rounded-full bg-forest lg:block" />
 
         <div className="relative mx-auto max-w-6xl px-6 pb-24 pt-20 lg:px-10 lg:pb-32 lg:pt-28">
           <div className="flex items-center gap-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-tomato" />
+            <span
+              className="h-1.5 w-1.5 rounded-full transition-colors duration-300"
+              style={{ backgroundColor: accent }}
+            />
             <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
               Multidisciplinary creative · Kingston, JA
             </p>
           </div>
           <div className="mt-6 flex items-center justify-between gap-3 sm:gap-6 lg:gap-10">
             <h1 className="font-sketch shrink-0 text-[22vw] leading-[0.9] sm:text-[180px] lg:text-[220px]">
-              okiela<span className="text-accent-tomato">.</span>
+              okiela
+              <span className="transition-colors duration-300" style={{ color: accent }}>
+                .
+              </span>
             </h1>
             <div
               className="relative ml-auto h-[32vw] w-[32vw] max-h-[300px] max-w-[300px] shrink-0 sm:h-[200px] sm:w-[200px] lg:h-[260px] lg:w-[260px]"
@@ -123,16 +136,16 @@ function Index() {
               working palette
             </p>
             <div className="flex items-center gap-2">
-              {["bg-maroon", "bg-amber", "bg-mint", "bg-navy", "bg-pink", "bg-forest", "bg-accent-sun"].map((c, i) => {
-                const active = activeSwatches.has(i);
+              {PALETTE.map((p, i) => {
+                const active = activeIdx === i;
                 return (
                   <button
-                    key={c}
+                    key={p.bg}
                     type="button"
-                    onClick={() => toggleSwatch(i)}
-                    aria-label={`Toggle palette swatch ${i + 1}`}
+                    onClick={() => setActiveIdx(active ? null : i)}
+                    aria-label={`Use palette swatch ${i + 1} as accent`}
                     aria-pressed={active}
-                    className={`h-4 w-4 cursor-pointer rounded-full transition-colors duration-300 ${active ? "bg-accent-tomato" : c}`}
+                    className={`h-4 w-4 cursor-pointer rounded-full ${p.bg} ${active ? "ring-2 ring-foreground ring-offset-2 ring-offset-background" : ""}`}
                     style={{
                       animation: "swatch-wave 2.4s ease-in-out infinite",
                       animationDelay: `${i * 0.14}s`,
