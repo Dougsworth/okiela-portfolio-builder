@@ -299,12 +299,15 @@ function Index() {
 
           <div className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-3">
             {[
-              { n: "84", l: "Projects shipped", color: "var(--accent-tomato)" },
-              { n: "07", l: "Years designing", color: "var(--forest)" },
-              { n: "42", l: "Happy clients", color: "var(--navy)" },
+              { n: "148", l: "sketches this year", color: "var(--accent-tomato)", icon: "pencil" as const },
+              { n: "9", l: "sketchbooks filled", color: "var(--forest)", icon: "book" as const },
+              { n: "∞", l: "ideas in rotation", color: "var(--navy)", icon: "spark" as const },
             ].map((s) => (
               <div key={s.l} className="relative">
-                <div className="font-serif text-6xl tabular-nums lg:text-7xl">{s.n}</div>
+                <div className="flex items-baseline gap-3">
+                  <div className="font-serif text-6xl tabular-nums lg:text-7xl">{s.n}</div>
+                  <StatIcon type={s.icon} color={s.color} />
+                </div>
                 <SketchUnderline color={s.color} />
                 <div className="mt-5 font-sketch text-lg text-muted-foreground">
                   {s.l}
@@ -328,8 +331,26 @@ function Index() {
             {EMAIL}
           </a>
 
-          <div className="mt-16 hairline-t pt-8 flex flex-col gap-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-            <p>© 2026 Okiela. Kingston, Jamaica.</p>
+          <div className="mt-12 flex items-center gap-2 font-sketch text-base text-muted-foreground">
+            <span>made with</span>
+            <svg
+              width="16"
+              height="14"
+              viewBox="0 0 16 14"
+              fill="none"
+              aria-hidden
+              style={{ animation: "lily-breathe 1.6s ease-in-out infinite" }}
+            >
+              <path
+                d="M8 12.5 C8 12.5 1.5 8.5 1.5 4.6 C1.5 2.6 3 1.2 4.6 1.2 C6 1.2 7.2 1.9 8 3 C8.8 1.9 10 1.2 11.4 1.2 C13 1.2 14.5 2.6 14.5 4.6 C14.5 8.5 8 12.5 8 12.5 Z"
+                fill="var(--accent-tomato)"
+              />
+            </svg>
+            <span>in Kingston, JA</span>
+          </div>
+
+          <div className="mt-8 hairline-t pt-8 flex flex-col gap-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+            <p>© 2026 Okiela. All small things, carefully.</p>
             <div className="flex gap-8">
               <a href="#" className="transition-colors hover:text-foreground">Instagram</a>
               <a href="#" className="transition-colors hover:text-foreground">Are.na</a>
@@ -339,6 +360,55 @@ function Index() {
         </div>
       </footer>
     </main>
+  );
+}
+
+function StatIcon({ type, color }: { type: "pencil" | "book" | "spark"; color: string }) {
+  const common = {
+    width: 28,
+    height: 28,
+    viewBox: "0 0 32 32",
+    fill: "none" as const,
+    stroke: color,
+    strokeWidth: 1.8,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+  if (type === "pencil") {
+    return (
+      <svg
+        {...common}
+        aria-hidden
+        style={{ animation: "block-drift 3.6s ease-in-out infinite", ["--rot" as string]: "-12deg" }}
+      >
+        <path d="M5 27 L9 23 L24 8 L27 11 L12 26 Z" />
+        <path d="M9 23 L12 26" />
+        <path d="M22 6 L26 10" />
+      </svg>
+    );
+  }
+  if (type === "book") {
+    return (
+      <svg
+        {...common}
+        aria-hidden
+        style={{ animation: "block-drift 4s ease-in-out infinite 0.4s", ["--rot" as string]: "6deg" }}
+      >
+        <path d="M6 7 L16 5 L26 7 L26 26 L16 24 L6 26 Z" />
+        <path d="M16 5 L16 24" />
+        <path d="M9 11 L13 10.4 M9 15 L13 14.4 M19 10.4 L23 11 M19 14.4 L23 15" opacity="0.6" />
+      </svg>
+    );
+  }
+  // spark
+  return (
+    <svg
+      {...common}
+      aria-hidden
+      style={{ animation: "block-spin-slow 18s linear infinite" }}
+    >
+      <path d="M16 4 L18 14 L28 16 L18 18 L16 28 L14 18 L4 16 L14 14 Z" fill={color} stroke="none" opacity="0.9" />
+    </svg>
   );
 }
 
