@@ -11,21 +11,6 @@ import {
 
 export const Route = createFileRoute("/")({
   component: Index,
-  head: () => ({
-    meta: [
-      { title: "Okiela — Graphic designer, Kingston" },
-      {
-        name: "description",
-        content:
-          "Okiela is a graphic designer based in Kingston, Jamaica, working on posters, labels, flyers and brand identity.",
-      },
-      { property: "og:title", content: "Okiela — Graphic designer, Kingston" },
-      {
-        property: "og:description",
-        content: "Posters, labels, flyers and brand identity, made quietly in Kingston, JA.",
-      },
-    ],
-  }),
 });
 
 const services = [
@@ -61,8 +46,13 @@ function Index() {
 
       {/* ───── Hero ───── */}
       <section id="top" className="hairline-b relative overflow-hidden">
-        {/* colorful accents */}
-        <div className="pointer-events-none absolute -right-20 -top-16 h-72 w-72 rounded-full bg-accent-sun opacity-90 lg:h-[420px] lg:w-[420px]" />
+        {/* animated lily */}
+        <div
+          className="pointer-events-none absolute -right-20 -top-16 h-72 w-72 lg:h-[420px] lg:w-[420px]"
+          style={{ animation: "lily-sway 9s ease-in-out infinite" }}
+        >
+          <Lily />
+        </div>
         <div className="pointer-events-none absolute right-40 top-40 hidden h-3 w-3 rounded-full bg-accent-tomato lg:block" />
         <div className="pointer-events-none absolute left-[42%] top-24 hidden h-2 w-2 rounded-full bg-forest lg:block" />
 
@@ -70,7 +60,7 @@ function Index() {
           <div className="flex items-center gap-3">
             <span className="h-1.5 w-1.5 rounded-full bg-accent-tomato" />
             <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              Graphic designer · Kingston, JA
+              Multidisciplinary creative · Kingston, JA
             </p>
           </div>
           <h1 className="mt-8 text-[18vw] leading-[0.85] tracking-[-0.04em] sm:text-[140px] lg:text-[180px]">
@@ -236,5 +226,74 @@ function Index() {
         </div>
       </footer>
     </main>
+  );
+}
+
+function Lily() {
+  const petalAngles = [0, 60, 120, 180, 240, 300];
+  return (
+    <svg
+      viewBox="0 0 200 200"
+      className="h-full w-full origin-center"
+      style={{ animation: "lily-breathe 7s ease-in-out infinite" }}
+      aria-hidden
+    >
+      {/* outer petals — softer, behind */}
+      <g transform="rotate(30 100 100)">
+        {petalAngles.map((a, i) => (
+          <ellipse
+            key={`outer-${a}`}
+            cx="100"
+            cy="58"
+            rx="20"
+            ry="46"
+            fill="var(--accent-sun)"
+            opacity="0.55"
+            transform={`rotate(${a} 100 100)`}
+            style={{
+              transformOrigin: "100px 100px",
+              animation: `lily-petal-bloom 1.4s ease-out ${0.05 * i}s both`,
+            }}
+          />
+        ))}
+      </g>
+      {/* inner petals */}
+      {petalAngles.map((a, i) => (
+        <ellipse
+          key={`inner-${a}`}
+          cx="100"
+          cy="62"
+          rx="16"
+          ry="40"
+          fill="var(--accent-sun)"
+          opacity="0.95"
+          transform={`rotate(${a} 100 100)`}
+          style={{
+            transformOrigin: "100px 100px",
+            animation: `lily-petal-bloom 1.2s ease-out ${0.4 + 0.06 * i}s both`,
+          }}
+        />
+      ))}
+      {/* stamens */}
+      <g style={{ animation: "lily-stamen-pulse 4s ease-in-out infinite" }}>
+        {petalAngles.map((a) => (
+          <g key={`s-${a}`} transform={`rotate(${a} 100 100)`}>
+            <line
+              x1="100"
+              y1="100"
+              x2="100"
+              y2="76"
+              stroke="var(--maroon)"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+            />
+            <circle cx="100" cy="74" r="2.2" fill="var(--maroon)" />
+          </g>
+        ))}
+      </g>
+      {/* center */}
+      <circle cx="100" cy="100" r="11" fill="var(--accent-tomato)" />
+      <circle cx="100" cy="100" r="5" fill="var(--maroon)" opacity="0.7" />
+    </svg>
   );
 }
