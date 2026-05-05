@@ -182,11 +182,14 @@ function Index() {
       </section>
 
       {/* ───── About ───── */}
-      <section id="about" className="hairline-b bg-secondary">
-        <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-            About
-          </p>
+      <section id="about" className="hairline-b relative overflow-hidden bg-accent-sun text-maroon-ink">
+        <div className="pointer-events-none absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-accent-tomato opacity-90" />
+        <div className="pointer-events-none absolute right-10 top-12 h-3 w-3 rounded-full bg-forest" />
+        <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
+          <div className="flex items-center gap-2.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-maroon-ink" />
+            <p className="text-[11px] uppercase tracking-[0.22em] opacity-70">About</p>
+          </div>
           <blockquote className="mt-10 max-w-4xl font-serif text-3xl leading-[1.15] tracking-tight sm:text-4xl lg:text-5xl">
             “I make small, careful things — labels you want to keep, posters you want to frame,
             wordmarks that feel like they were always there.”
