@@ -280,7 +280,7 @@ function Index() {
             <p className="font-sketch text-2xl text-foreground lg:text-3xl">about</p>
           </div>
           <blockquote className="mt-10 max-w-4xl font-serif text-3xl leading-[1.15] tracking-tight sm:text-4xl lg:text-5xl">
-            “A late-April Taurus — patient about the details, stubborn about the craft. I move between{" "}
+            “Born in late April, partial to slow craft — patient about the details, stubborn about the work. I move between{" "}
             <span className="relative inline-block">
               posters
               <SketchUnderline color="var(--accent-tomato)" />
