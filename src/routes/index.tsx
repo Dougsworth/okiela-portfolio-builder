@@ -46,13 +46,6 @@ function Index() {
 
       {/* ───── Hero ───── */}
       <section id="top" className="hairline-b relative overflow-hidden">
-        {/* animated lily */}
-        <div
-          className="pointer-events-none absolute -right-20 -top-16 h-72 w-72 lg:h-[420px] lg:w-[420px]"
-          style={{ animation: "lily-sway 9s ease-in-out infinite" }}
-        >
-          <Lily />
-        </div>
         <div className="pointer-events-none absolute right-40 top-40 hidden h-3 w-3 rounded-full bg-accent-tomato lg:block" />
         <div className="pointer-events-none absolute left-[42%] top-24 hidden h-2 w-2 rounded-full bg-forest lg:block" />
 
@@ -63,9 +56,31 @@ function Index() {
               Multidisciplinary creative · Kingston, JA
             </p>
           </div>
-          <h1 className="mt-8 text-[18vw] leading-[0.85] tracking-[-0.04em] sm:text-[140px] lg:text-[180px]">
-            okiela<span className="text-accent-tomato">.</span>
-          </h1>
+          <div className="mt-6 flex items-center gap-3 sm:gap-6 lg:gap-10">
+            <h1 className="font-sketch shrink-0 text-[22vw] leading-[0.9] sm:text-[180px] lg:text-[220px]">
+              okiela<span className="text-accent-tomato">.</span>
+            </h1>
+            <div
+              className="relative h-[32vw] w-[32vw] max-h-[300px] max-w-[300px] shrink-0 sm:h-[200px] sm:w-[200px] lg:h-[260px] lg:w-[260px]"
+              style={{ animation: "lily-sway 9s ease-in-out infinite" }}
+              aria-hidden
+            >
+              <img
+                src="/waterlilly.png"
+                alt=""
+                className="h-full w-full object-cover"
+                style={{
+                  animation: "lily-breathe 7s ease-in-out infinite",
+                  WebkitMaskImage:
+                    "radial-gradient(circle at 50% 55%, black 30%, rgba(0,0,0,0.55) 48%, transparent 70%)",
+                  maskImage:
+                    "radial-gradient(circle at 50% 55%, black 30%, rgba(0,0,0,0.55) 48%, transparent 70%)",
+                  mixBlendMode: "multiply",
+                  filter: "saturate(0.92) contrast(1.02)",
+                }}
+              />
+            </div>
+          </div>
           <div className="mt-10 flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
             <p className="max-w-md font-serif text-2xl leading-snug text-foreground lg:text-[28px]">
               Quiet, considered design — <span className="text-accent-tomato">posters</span>,{" "}
@@ -91,8 +106,8 @@ function Index() {
 
           {/* swatch row */}
           <div className="mt-16 hairline-t pt-6 flex items-center justify-between">
-            <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-              Working palette
+            <p className="font-sketch text-lg text-muted-foreground">
+              working palette
             </p>
             <div className="flex items-center gap-2">
               {["bg-maroon", "bg-amber", "bg-mint", "bg-navy", "bg-pink", "bg-forest", "bg-accent-sun"].map((c) => (
@@ -107,11 +122,11 @@ function Index() {
       <section id="services" className="hairline-b">
         <div className="mx-auto max-w-6xl px-6 py-16 lg:px-10 lg:py-20">
           <div className="mb-10 flex items-baseline justify-between">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              Services
+            <p className="font-sketch text-2xl text-foreground lg:text-3xl">
+              services
             </p>
-            <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              Four things, done well
+            <p className="font-sketch text-lg text-muted-foreground">
+              four things, done well
             </p>
           </div>
           <div className="grid grid-cols-1 gap-px overflow-hidden rounded-[10px] sm:grid-cols-2 lg:grid-cols-4">
@@ -140,10 +155,10 @@ function Index() {
       <section id="work" className="hairline-b">
         <div className="mx-auto max-w-6xl px-6 py-16 lg:px-10 lg:py-24">
           <div className="mb-12 flex items-baseline justify-between">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              Selected work
+            <p className="font-sketch text-2xl text-foreground lg:text-3xl">
+              selected work
             </p>
-            <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+            <p className="font-sketch text-lg text-muted-foreground">
               2023 — 2026
             </p>
           </div>
@@ -178,7 +193,7 @@ function Index() {
         <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
           <div className="flex items-center gap-2.5">
             <span className="h-1.5 w-1.5 rounded-full bg-maroon-ink" />
-            <p className="text-[11px] uppercase tracking-[0.22em] opacity-70">About</p>
+            <p className="font-sketch text-2xl opacity-80 lg:text-3xl">about</p>
           </div>
           <blockquote className="mt-10 max-w-4xl font-serif text-3xl leading-[1.15] tracking-tight sm:text-4xl lg:text-5xl">
             “I make small, careful things — labels you want to keep, posters you want to frame,
@@ -205,8 +220,8 @@ function Index() {
       {/* ───── Footer ───── */}
       <footer id="contact">
         <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-            Start a project
+          <p className="font-sketch text-2xl text-muted-foreground lg:text-3xl">
+            start a project
           </p>
           <a
             href="mailto:hello@okiela.studio"
@@ -229,71 +244,3 @@ function Index() {
   );
 }
 
-function Lily() {
-  const petalAngles = [0, 60, 120, 180, 240, 300];
-  return (
-    <svg
-      viewBox="0 0 200 200"
-      className="h-full w-full origin-center"
-      style={{ animation: "lily-breathe 7s ease-in-out infinite" }}
-      aria-hidden
-    >
-      {/* outer petals — softer, behind */}
-      <g transform="rotate(30 100 100)">
-        {petalAngles.map((a, i) => (
-          <ellipse
-            key={`outer-${a}`}
-            cx="100"
-            cy="58"
-            rx="20"
-            ry="46"
-            fill="var(--accent-sun)"
-            opacity="0.55"
-            transform={`rotate(${a} 100 100)`}
-            style={{
-              transformOrigin: "100px 100px",
-              animation: `lily-petal-bloom 1.4s ease-out ${0.05 * i}s both`,
-            }}
-          />
-        ))}
-      </g>
-      {/* inner petals */}
-      {petalAngles.map((a, i) => (
-        <ellipse
-          key={`inner-${a}`}
-          cx="100"
-          cy="62"
-          rx="16"
-          ry="40"
-          fill="var(--accent-sun)"
-          opacity="0.95"
-          transform={`rotate(${a} 100 100)`}
-          style={{
-            transformOrigin: "100px 100px",
-            animation: `lily-petal-bloom 1.2s ease-out ${0.4 + 0.06 * i}s both`,
-          }}
-        />
-      ))}
-      {/* stamens */}
-      <g style={{ animation: "lily-stamen-pulse 4s ease-in-out infinite" }}>
-        {petalAngles.map((a) => (
-          <g key={`s-${a}`} transform={`rotate(${a} 100 100)`}>
-            <line
-              x1="100"
-              y1="100"
-              x2="100"
-              y2="76"
-              stroke="var(--maroon)"
-              strokeWidth="1.4"
-              strokeLinecap="round"
-            />
-            <circle cx="100" cy="74" r="2.2" fill="var(--maroon)" />
-          </g>
-        ))}
-      </g>
-      {/* center */}
-      <circle cx="100" cy="100" r="11" fill="var(--accent-tomato)" />
-      <circle cx="100" cy="100" r="5" fill="var(--maroon)" opacity="0.7" />
-    </svg>
-  );
-}
