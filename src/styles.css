@@ -52,8 +52,13 @@
 :root {
   --radius: 0.625rem;
 
-  --background: oklch(0.985 0.002 80);
+  --background: oklch(0.985 0.012 85);
   --foreground: oklch(0.18 0.01 60);
+
+  /* Accent — warm sun */
+  --accent-sun: oklch(0.85 0.16 75);
+  --accent-tomato: oklch(0.62 0.2 25);
+  --accent-sky: oklch(0.78 0.1 220);
 
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.01 60);
