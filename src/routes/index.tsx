@@ -56,12 +56,12 @@ function Index() {
               Multidisciplinary creative · Kingston, JA
             </p>
           </div>
-          <div className="mt-6 flex items-center gap-3 sm:gap-6 lg:gap-10">
+          <div className="mt-6 flex items-center justify-between gap-3 sm:gap-6 lg:gap-10">
             <h1 className="font-sketch shrink-0 text-[22vw] leading-[0.9] sm:text-[180px] lg:text-[220px]">
               okiela<span className="text-accent-tomato">.</span>
             </h1>
             <div
-              className="relative h-[32vw] w-[32vw] max-h-[300px] max-w-[300px] shrink-0 sm:h-[200px] sm:w-[200px] lg:h-[260px] lg:w-[260px]"
+              className="relative ml-auto h-[32vw] w-[32vw] max-h-[300px] max-w-[300px] shrink-0 sm:h-[200px] sm:w-[200px] lg:h-[260px] lg:w-[260px]"
               style={{ animation: "lily-sway 9s ease-in-out infinite" }}
               aria-hidden
             >
