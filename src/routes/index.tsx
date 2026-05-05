@@ -41,8 +41,8 @@ function Index() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       {/* ───── Nav ───── */}
-      <header className="hairline-b">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 lg:px-10">
+      <header className="hairline-b sticky top-0 z-30 bg-background/85 backdrop-blur-md">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-6 sm:py-5 lg:px-10">
           <a href="#top" className="text-sm tracking-tight">
             okiela.
           </a>
@@ -54,11 +54,18 @@ function Index() {
           </nav>
           <a
             href={MAILTO}
-            className="hairline rounded-[8px] px-3.5 py-1.5 text-xs transition-opacity hover:opacity-70"
+            className="hairline rounded-[8px] px-3.5 py-2 text-xs transition-opacity hover:opacity-70"
           >
             Available
           </a>
         </div>
+        {/* mobile-only nav row */}
+        <nav className="hairline-t mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 text-xs text-muted-foreground md:hidden">
+          <a href="#work" className="transition-colors hover:text-foreground">Work</a>
+          <a href="#services" className="transition-colors hover:text-foreground">Services</a>
+          <a href="#about" className="transition-colors hover:text-foreground">About</a>
+          <a href="#contact" className="transition-colors hover:text-foreground">Contact</a>
+        </nav>
       </header>
 
       {/* ───── Hero ───── */}
@@ -69,25 +76,25 @@ function Index() {
         />
         <div className="pointer-events-none absolute left-[42%] top-24 hidden h-2 w-2 rounded-full bg-forest lg:block" />
 
-        <div className="relative mx-auto max-w-6xl px-6 pb-24 pt-20 lg:px-10 lg:pb-32 lg:pt-28">
+        <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-12 sm:px-6 sm:pb-24 sm:pt-20 lg:px-10 lg:pb-32 lg:pt-28">
           <div className="flex items-center gap-3">
             <span
               className="h-1.5 w-1.5 rounded-full transition-colors duration-300"
               style={{ backgroundColor: accent }}
             />
-            <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+            <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:text-[11px]">
               Multidisciplinary creative · Kingston, JA
             </p>
           </div>
-          <div className="mt-6 flex items-center justify-between gap-3 sm:gap-6 lg:gap-10">
-            <h1 className="font-sketch shrink-0 text-[22vw] leading-[0.9] sm:text-[180px] lg:text-[220px]">
+          <div className="mt-4 flex flex-col items-end gap-2 sm:mt-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6 lg:gap-10">
+            <h1 className="order-2 self-stretch text-left font-sketch text-[26vw] leading-[0.9] sm:order-1 sm:shrink-0 sm:self-auto sm:text-[180px] lg:text-[220px]">
               okiela
               <span className="transition-colors duration-300" style={{ color: accent }}>
                 .
               </span>
             </h1>
             <div
-              className="relative ml-auto h-[32vw] w-[32vw] max-h-[300px] max-w-[300px] shrink-0 sm:h-[200px] sm:w-[200px] lg:h-[260px] lg:w-[260px]"
+              className="relative order-1 h-[34vw] w-[34vw] max-h-[160px] max-w-[160px] shrink-0 sm:order-2 sm:ml-auto sm:h-[200px] sm:w-[200px] sm:max-h-none sm:max-w-none lg:h-[260px] lg:w-[260px]"
               style={{ animation: "lily-sway 9s ease-in-out infinite" }}
               aria-hidden
             >
@@ -107,8 +114,8 @@ function Index() {
               />
             </div>
           </div>
-          <div className="mt-10 flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-            <p className="max-w-md font-serif text-2xl leading-snug text-foreground lg:text-[28px]">
+          <div className="mt-8 flex flex-col gap-6 sm:mt-10 sm:gap-10 lg:flex-row lg:items-end lg:justify-between">
+            <p className="max-w-md font-serif text-xl leading-snug text-foreground sm:text-2xl lg:text-[28px]">
               Quiet, considered design — <span className="text-accent-tomato">posters</span>,{" "}
               <span className="text-forest">labels</span>,{" "}
               <span className="text-navy">flyers</span> and{" "}
@@ -117,13 +124,13 @@ function Index() {
             <div className="flex gap-3">
               <a
                 href="#work"
-                className="hairline rounded-[10px] bg-foreground px-5 py-2.5 text-sm text-background transition-opacity hover:opacity-85"
+                className="hairline rounded-[10px] bg-foreground px-5 py-3 text-sm text-background transition-opacity hover:opacity-85"
               >
                 View work
               </a>
               <a
                 href={MAILTO}
-                className="hairline rounded-[10px] px-5 py-2.5 text-sm transition-colors hover:bg-foreground hover:text-background"
+                className="hairline rounded-[10px] px-5 py-3 text-sm transition-colors hover:bg-foreground hover:text-background"
               >
                 Start a project
               </a>
@@ -135,7 +142,7 @@ function Index() {
             <p className="font-sketch text-lg text-muted-foreground">
               working palette
             </p>
-            <div className="flex items-center gap-2">
+            <div className="-mr-2 flex items-center gap-1 sm:gap-2">
               {PALETTE.map((p, i) => {
                 const active = activeIdx === i;
                 return (
@@ -145,12 +152,16 @@ function Index() {
                     onClick={() => setActiveIdx(active ? null : i)}
                     aria-label={`Use palette swatch ${i + 1} as accent`}
                     aria-pressed={active}
-                    className={`h-4 w-4 cursor-pointer rounded-full ${p.bg} ${active ? "ring-2 ring-foreground ring-offset-2 ring-offset-background" : ""}`}
-                    style={{
-                      animation: "swatch-wave 2.4s ease-in-out infinite",
-                      animationDelay: `${i * 0.14}s`,
-                    }}
-                  />
+                    className="grid h-9 w-9 cursor-pointer place-items-center rounded-full sm:h-7 sm:w-7"
+                  >
+                    <span
+                      className={`block h-5 w-5 rounded-full sm:h-4 sm:w-4 ${p.bg} ${active ? "ring-2 ring-foreground ring-offset-2 ring-offset-background" : ""}`}
+                      style={{
+                        animation: "swatch-wave 2.4s ease-in-out infinite",
+                        animationDelay: `${i * 0.14}s`,
+                      }}
+                    />
+                  </button>
                 );
               })}
             </div>
@@ -326,7 +337,7 @@ function Index() {
           </p>
           <a
             href={MAILTO}
-            className="mt-8 block break-all font-serif text-4xl tracking-tight transition-opacity hover:opacity-60 sm:text-5xl lg:text-6xl"
+            className="mt-8 block break-words font-serif text-3xl tracking-tight transition-opacity hover:opacity-60 sm:text-4xl md:text-5xl lg:text-6xl"
           >
             {EMAIL}
           </a>
