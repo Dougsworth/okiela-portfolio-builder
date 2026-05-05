@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ProjectTile,
@@ -13,6 +14,9 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const EMAIL = "okielahenry05@gmail.com";
+const MAILTO = `mailto:${EMAIL}?subject=Inquiry%20%E2%80%94%20Okiela`;
+
 const services = [
   { n: "01", title: "Posters", body: "Editorial posters and series for galleries, events and music.", dot: "bg-maroon" },
   { n: "02", title: "Labels", body: "Bottle and jar labels with a focus on craft and small runs.", dot: "bg-mint" },
@@ -21,6 +25,15 @@ const services = [
 ];
 
 function Index() {
+  const [activeSwatches, setActiveSwatches] = useState<Set<number>>(new Set());
+  const toggleSwatch = (i: number) =>
+    setActiveSwatches((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       {/* ───── Nav ───── */}
@@ -36,7 +49,7 @@ function Index() {
             <a href="#contact" className="transition-colors hover:text-foreground">Contact</a>
           </nav>
           <a
-            href="#contact"
+            href={MAILTO}
             className="hairline rounded-[8px] px-3.5 py-1.5 text-xs transition-opacity hover:opacity-70"
           >
             Available
@@ -96,7 +109,7 @@ function Index() {
                 View work
               </a>
               <a
-                href="#contact"
+                href={MAILTO}
                 className="hairline rounded-[10px] px-5 py-2.5 text-sm transition-colors hover:bg-foreground hover:text-background"
               >
                 Start a project
@@ -110,16 +123,23 @@ function Index() {
               working palette
             </p>
             <div className="flex items-center gap-2">
-              {["bg-maroon", "bg-amber", "bg-mint", "bg-navy", "bg-pink", "bg-forest", "bg-accent-sun"].map((c, i) => (
-                <span
-                  key={c}
-                  className={`h-4 w-4 rounded-full ${c}`}
-                  style={{
-                    animation: "swatch-wave 2.4s ease-in-out infinite",
-                    animationDelay: `${i * 0.14}s`,
-                  }}
-                />
-              ))}
+              {["bg-maroon", "bg-amber", "bg-mint", "bg-navy", "bg-pink", "bg-forest", "bg-accent-sun"].map((c, i) => {
+                const active = activeSwatches.has(i);
+                return (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => toggleSwatch(i)}
+                    aria-label={`Toggle palette swatch ${i + 1}`}
+                    aria-pressed={active}
+                    className={`h-4 w-4 cursor-pointer rounded-full transition-colors duration-300 ${active ? "bg-accent-tomato" : c}`}
+                    style={{
+                      animation: "swatch-wave 2.4s ease-in-out infinite",
+                      animationDelay: `${i * 0.14}s`,
+                    }}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
@@ -289,10 +309,10 @@ function Index() {
             start a project
           </p>
           <a
-            href="mailto:hello@okiela.studio"
-            className="mt-8 block font-serif text-5xl tracking-tight transition-opacity hover:opacity-60 sm:text-6xl lg:text-7xl"
+            href={MAILTO}
+            className="mt-8 block break-all font-serif text-4xl tracking-tight transition-opacity hover:opacity-60 sm:text-5xl lg:text-6xl"
           >
-            hello@okiela.studio
+            {EMAIL}
           </a>
 
           <div className="mt-16 hairline-t pt-8 flex flex-col gap-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
