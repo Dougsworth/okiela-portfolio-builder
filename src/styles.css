@@ -179,3 +179,23 @@
   0%, 100% { opacity: 0.7; }
   50% { opacity: 1; }
 }
+
+@keyframes swatch-wave {
+  0%, 70%, 100% { transform: translateY(0) scale(1); }
+  35% { transform: translateY(-6px) scale(1.18); }
+}
+
+@keyframes block-drift {
+  0%, 100% { transform: translate(0, 0) rotate(var(--rot, 0deg)); }
+  50% { transform: translate(2px, -4px) rotate(calc(var(--rot, 0deg) + 2deg)); }
+}
+
+@keyframes block-spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes block-draw {
+  0% { stroke-dashoffset: var(--len, 400); }
+  100% { stroke-dashoffset: 0; }
+}

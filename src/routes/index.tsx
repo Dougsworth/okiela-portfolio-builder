@@ -110,8 +110,15 @@ function Index() {
               working palette
             </p>
             <div className="flex items-center gap-2">
-              {["bg-maroon", "bg-amber", "bg-mint", "bg-navy", "bg-pink", "bg-forest", "bg-accent-sun"].map((c) => (
-                <span key={c} className={`h-4 w-4 rounded-full ${c}`} />
+              {["bg-maroon", "bg-amber", "bg-mint", "bg-navy", "bg-pink", "bg-forest", "bg-accent-sun"].map((c, i) => (
+                <span
+                  key={c}
+                  className={`h-4 w-4 rounded-full ${c}`}
+                  style={{
+                    animation: "swatch-wave 2.4s ease-in-out infinite",
+                    animationDelay: `${i * 0.14}s`,
+                  }}
+                />
               ))}
             </div>
           </div>
@@ -187,7 +194,26 @@ function Index() {
       </section>
 
       {/* ───── About ───── */}
-      <section id="about" className="hairline-b relative overflow-hidden bg-accent-sun text-maroon-ink">
+      <section
+        id="about"
+        className="hairline-b relative overflow-hidden text-maroon-ink"
+        style={{
+          background:
+            "radial-gradient(1200px 600px at 80% 0%, oklch(0.92 0.16 80) 0%, transparent 60%), radial-gradient(900px 700px at 0% 100%, oklch(0.82 0.17 65) 0%, transparent 55%), var(--accent-sun)",
+        }}
+      >
+        {/* graph-paper grid */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.09]"
+          style={{
+            backgroundImage:
+              "linear-gradient(var(--maroon-ink) 1px, transparent 1px), linear-gradient(90deg, var(--maroon-ink) 1px, transparent 1px)",
+            backgroundSize: "36px 36px",
+          }}
+        />
+        {/* hand-drawn building blocks */}
+        <BuildingBlocks />
+
         <div className="pointer-events-none absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-accent-tomato opacity-90" />
         <div className="pointer-events-none absolute right-10 top-12 h-3 w-3 rounded-full bg-forest" />
         <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
@@ -244,3 +270,142 @@ function Index() {
   );
 }
 
+function BuildingBlocks() {
+  const stroke = "var(--maroon-ink)";
+  return (
+    <>
+      {/* outlined square — top left, slow drift */}
+      <svg
+        className="pointer-events-none absolute left-[6%] top-16 hidden lg:block"
+        width="84"
+        height="84"
+        viewBox="0 0 84 84"
+        style={{ ["--rot" as string]: "-6deg", animation: "block-drift 9s ease-in-out infinite" }}
+        aria-hidden
+      >
+        <path
+          d="M8 10 L74 6 L78 76 L12 80 Z"
+          fill="none"
+          stroke={stroke}
+          strokeWidth="2.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeDasharray="320"
+          style={{ ["--len" as string]: "320", animation: "block-draw 2.4s ease-out 0.1s both" }}
+        />
+        <path
+          d="M20 24 L62 22 M22 38 L60 36 M24 52 L58 50 M26 66 L56 64"
+          fill="none"
+          stroke={stroke}
+          strokeWidth="1.2"
+          strokeLinecap="round"
+          opacity="0.55"
+        />
+      </svg>
+
+      {/* dotted circle — middle */}
+      <svg
+        className="pointer-events-none absolute left-[42%] top-10 hidden lg:block"
+        width="62"
+        height="62"
+        viewBox="0 0 62 62"
+        style={{ animation: "block-spin-slow 28s linear infinite" }}
+        aria-hidden
+      >
+        <circle
+          cx="31"
+          cy="31"
+          r="24"
+          fill="none"
+          stroke={stroke}
+          strokeWidth="1.6"
+          strokeDasharray="3 5"
+        />
+      </svg>
+
+      {/* hand-drawn triangle — right side */}
+      <svg
+        className="pointer-events-none absolute right-[10%] top-32 hidden md:block"
+        width="92"
+        height="92"
+        viewBox="0 0 92 92"
+        style={{ ["--rot" as string]: "8deg", animation: "block-drift 11s ease-in-out infinite 0.6s" }}
+        aria-hidden
+      >
+        <path
+          d="M46 8 L82 78 L10 82 Z"
+          fill="none"
+          stroke={stroke}
+          strokeWidth="2.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeDasharray="260"
+          style={{ ["--len" as string]: "260", animation: "block-draw 2.6s ease-out 0.4s both" }}
+        />
+      </svg>
+
+      {/* small filled brick — left lower */}
+      <svg
+        className="pointer-events-none absolute left-[18%] bottom-24 hidden lg:block"
+        width="70"
+        height="46"
+        viewBox="0 0 70 46"
+        style={{ ["--rot" as string]: "-4deg", animation: "block-drift 7s ease-in-out infinite 0.3s" }}
+        aria-hidden
+      >
+        <rect x="3" y="3" width="64" height="40" rx="2" fill={stroke} opacity="0.16" />
+        <rect
+          x="3"
+          y="3"
+          width="64"
+          height="40"
+          rx="2"
+          fill="none"
+          stroke={stroke}
+          strokeWidth="1.8"
+          strokeLinejoin="round"
+          strokeDasharray="220"
+          style={{ ["--len" as string]: "220", animation: "block-draw 2.2s ease-out 0.7s both" }}
+        />
+      </svg>
+
+      {/* arc / measurement curve — right lower */}
+      <svg
+        className="pointer-events-none absolute right-[22%] bottom-16 hidden lg:block"
+        width="100"
+        height="60"
+        viewBox="0 0 100 60"
+        aria-hidden
+      >
+        <path
+          d="M6 50 Q50 -6 94 50"
+          fill="none"
+          stroke={stroke}
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeDasharray="2 6"
+          opacity="0.75"
+        />
+        <circle cx="6" cy="50" r="2.4" fill={stroke} />
+        <circle cx="94" cy="50" r="2.4" fill={stroke} />
+      </svg>
+
+      {/* small cross stitch — center upper */}
+      <svg
+        className="pointer-events-none absolute left-[28%] top-40 hidden md:block"
+        width="22"
+        height="22"
+        viewBox="0 0 22 22"
+        aria-hidden
+        style={{ animation: "block-drift 5s ease-in-out infinite" }}
+      >
+        <path
+          d="M4 11 L18 11 M11 4 L11 18"
+          stroke={stroke}
+          strokeWidth="1.6"
+          strokeLinecap="round"
+        />
+      </svg>
+    </>
+  );
+}
