@@ -280,21 +280,21 @@ function Index() {
             <p className="font-sketch text-2xl text-foreground lg:text-3xl">about</p>
           </div>
           <blockquote className="mt-10 max-w-4xl font-serif text-3xl leading-[1.15] tracking-tight sm:text-4xl lg:text-5xl">
-            “I make small, careful things — <span className="relative inline-block">
-              labels
-              <SketchUnderline color="var(--forest)" />
-            </span>{" "}
-            you want to keep,{" "}
+            “A late-April Taurus — patient about the details, stubborn about the craft. I move between{" "}
             <span className="relative inline-block">
               posters
               <SketchUnderline color="var(--accent-tomato)" />
-            </span>{" "}
-            you want to frame,{" "}
+            </span>,{" "}
             <span className="relative inline-block">
-              wordmarks
+              type
+              <SketchUnderline color="var(--forest)" />
+            </span>{" "}
+            and{" "}
+            <span className="relative inline-block">
+              identity
               <SketchUnderline color="var(--navy)" />
             </span>{" "}
-            that feel like they were always there.”
+            because the best ideas refuse to live in one shape.”
           </blockquote>
 
           <div className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-3">
