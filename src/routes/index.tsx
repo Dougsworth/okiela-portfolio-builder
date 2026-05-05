@@ -280,7 +280,7 @@ function Index() {
             <p className="font-sketch text-2xl text-foreground lg:text-3xl">about</p>
           </div>
           <blockquote className="mt-10 max-w-4xl font-serif text-3xl leading-[1.15] tracking-tight sm:text-4xl lg:text-5xl">
-            “Born in late April, partial to slow craft — patient about the details, stubborn about the work. I move between{" "}
+            “I move between{" "}
             <span className="relative inline-block">
               posters
               <SketchUnderline color="var(--accent-tomato)" />
@@ -294,7 +294,7 @@ function Index() {
               identity
               <SketchUnderline color="var(--navy)" />
             </span>{" "}
-            because the best ideas refuse to live in one shape.”
+            because every craft teaches you to see something the others can't — and the best ideas refuse to live in just one shape.”
           </blockquote>
 
           <div className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-3">
