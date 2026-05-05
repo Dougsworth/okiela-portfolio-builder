@@ -29,10 +29,10 @@ export const Route = createFileRoute("/")({
 });
 
 const services = [
-  { n: "01", title: "Posters", body: "Editorial posters and series for galleries, events and music." },
-  { n: "02", title: "Labels", body: "Bottle and jar labels with a focus on craft and small runs." },
-  { n: "03", title: "Flyers", body: "Print and digital flyers for workshops, launches and parties." },
-  { n: "04", title: "Branding", body: "Wordmarks and full identity systems for small studios and shops." },
+  { n: "01", title: "Posters", body: "Editorial posters and series for galleries, events and music.", dot: "bg-maroon" },
+  { n: "02", title: "Labels", body: "Bottle and jar labels with a focus on craft and small runs.", dot: "bg-mint" },
+  { n: "03", title: "Flyers", body: "Print and digital flyers for workshops, launches and parties.", dot: "bg-amber" },
+  { n: "04", title: "Branding", body: "Wordmarks and full identity systems for small studios and shops.", dot: "bg-navy" },
 ];
 
 function Index() {
