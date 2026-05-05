@@ -128,11 +128,14 @@ function Index() {
             {services.map((s) => (
               <div
                 key={s.n}
-                className="hairline flex flex-col gap-8 rounded-[10px] bg-card p-6 lg:p-7"
+                className="hairline group flex flex-col gap-8 rounded-[10px] bg-card p-6 transition-colors hover:bg-secondary lg:p-7"
               >
-                <span className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground tabular-nums">
-                  {s.n}
-                </span>
+                <div className="flex items-center gap-2.5">
+                  <span className={`h-2 w-2 rounded-full ${s.dot}`} />
+                  <span className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground tabular-nums">
+                    {s.n}
+                  </span>
+                </div>
                 <div>
                   <h3 className="font-serif text-2xl">{s.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
