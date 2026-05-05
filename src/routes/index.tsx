@@ -196,45 +196,84 @@ function Index() {
       {/* ───── About ───── */}
       <section
         id="about"
-        className="hairline-b relative overflow-hidden text-maroon-ink"
-        style={{
-          background:
-            "radial-gradient(1200px 600px at 80% 0%, oklch(0.92 0.16 80) 0%, transparent 60%), radial-gradient(900px 700px at 0% 100%, oklch(0.82 0.17 65) 0%, transparent 55%), var(--accent-sun)",
-        }}
+        className="hairline-b relative overflow-hidden bg-background text-foreground"
       >
         {/* graph-paper grid */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.09]"
+          className="pointer-events-none absolute inset-0 opacity-[0.13]"
           style={{
             backgroundImage:
-              "linear-gradient(var(--maroon-ink) 1px, transparent 1px), linear-gradient(90deg, var(--maroon-ink) 1px, transparent 1px)",
+              "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
             backgroundSize: "36px 36px",
+            maskImage:
+              "radial-gradient(ellipse 90% 80% at 50% 50%, black 40%, transparent 95%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 90% 80% at 50% 50%, black 40%, transparent 95%)",
+          }}
+        />
+        {/* paper grain noise */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-multiply"
+          style={{
+            backgroundImage:
+              "radial-gradient(var(--foreground) 0.6px, transparent 0.6px)",
+            backgroundSize: "4px 4px",
           }}
         />
         {/* hand-drawn building blocks */}
         <BuildingBlocks />
 
-        <div className="pointer-events-none absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-accent-tomato opacity-90" />
-        <div className="pointer-events-none absolute right-10 top-12 h-3 w-3 rounded-full bg-forest" />
+        {/* small color study — replaces solid blob */}
+        <div className="pointer-events-none absolute bottom-10 left-8 hidden flex-col gap-2 lg:flex">
+          <span className="font-sketch text-sm text-muted-foreground">color study</span>
+          <div className="grid grid-cols-3 gap-1.5">
+            {["bg-maroon", "bg-amber", "bg-mint", "bg-navy", "bg-pink", "bg-forest"].map((c, i) => (
+              <span
+                key={c}
+                className={`h-5 w-5 rounded-[3px] ${c}`}
+                style={{
+                  animation: "swatch-wave 3s ease-in-out infinite",
+                  animationDelay: `${i * 0.12}s`,
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="pointer-events-none absolute right-10 top-12 h-3 w-3 rounded-full bg-accent-tomato" />
         <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
           <div className="flex items-center gap-2.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-maroon-ink" />
-            <p className="font-sketch text-2xl opacity-80 lg:text-3xl">about</p>
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-tomato" />
+            <p className="font-sketch text-2xl text-foreground lg:text-3xl">about</p>
           </div>
           <blockquote className="mt-10 max-w-4xl font-serif text-3xl leading-[1.15] tracking-tight sm:text-4xl lg:text-5xl">
-            “I make small, careful things — labels you want to keep, posters you want to frame,
-            wordmarks that feel like they were always there.”
+            “I make small, careful things — <span className="relative inline-block">
+              labels
+              <SketchUnderline color="var(--forest)" />
+            </span>{" "}
+            you want to keep,{" "}
+            <span className="relative inline-block">
+              posters
+              <SketchUnderline color="var(--accent-tomato)" />
+            </span>{" "}
+            you want to frame,{" "}
+            <span className="relative inline-block">
+              wordmarks
+              <SketchUnderline color="var(--navy)" />
+            </span>{" "}
+            that feel like they were always there.”
           </blockquote>
 
-          <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-[10px] sm:grid-cols-3">
+          <div className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-3">
             {[
-              { n: "84", l: "Projects shipped" },
-              { n: "07", l: "Years designing" },
-              { n: "42", l: "Happy clients" },
+              { n: "84", l: "Projects shipped", color: "var(--accent-tomato)" },
+              { n: "07", l: "Years designing", color: "var(--forest)" },
+              { n: "42", l: "Happy clients", color: "var(--navy)" },
             ].map((s) => (
-              <div key={s.l} className="hairline rounded-[10px] bg-background p-6 lg:p-8">
-                <div className="font-serif text-5xl tabular-nums lg:text-6xl">{s.n}</div>
-                <div className="mt-4 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              <div key={s.l} className="relative">
+                <div className="font-serif text-6xl tabular-nums lg:text-7xl">{s.n}</div>
+                <SketchUnderline color={s.color} />
+                <div className="mt-5 font-sketch text-lg text-muted-foreground">
                   {s.l}
                 </div>
               </div>
@@ -271,10 +310,9 @@ function Index() {
 }
 
 function BuildingBlocks() {
-  const stroke = "var(--maroon-ink)";
   return (
     <>
-      {/* outlined square — top left, slow drift */}
+      {/* outlined square with ledger lines — top left */}
       <svg
         className="pointer-events-none absolute left-[6%] top-16 hidden lg:block"
         width="84"
@@ -286,7 +324,7 @@ function BuildingBlocks() {
         <path
           d="M8 10 L74 6 L78 76 L12 80 Z"
           fill="none"
-          stroke={stroke}
+          stroke="var(--forest)"
           strokeWidth="2.2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -296,10 +334,10 @@ function BuildingBlocks() {
         <path
           d="M20 24 L62 22 M22 38 L60 36 M24 52 L58 50 M26 66 L56 64"
           fill="none"
-          stroke={stroke}
+          stroke="var(--forest)"
           strokeWidth="1.2"
           strokeLinecap="round"
-          opacity="0.55"
+          opacity="0.5"
         />
       </svg>
 
@@ -317,8 +355,8 @@ function BuildingBlocks() {
           cy="31"
           r="24"
           fill="none"
-          stroke={stroke}
-          strokeWidth="1.6"
+          stroke="var(--accent-tomato)"
+          strokeWidth="1.8"
           strokeDasharray="3 5"
         />
       </svg>
@@ -335,7 +373,7 @@ function BuildingBlocks() {
         <path
           d="M46 8 L82 78 L10 82 Z"
           fill="none"
-          stroke={stroke}
+          stroke="var(--navy)"
           strokeWidth="2.2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -346,14 +384,14 @@ function BuildingBlocks() {
 
       {/* small filled brick — left lower */}
       <svg
-        className="pointer-events-none absolute left-[18%] bottom-24 hidden lg:block"
+        className="pointer-events-none absolute left-[15%] bottom-32 hidden lg:block"
         width="70"
         height="46"
         viewBox="0 0 70 46"
         style={{ ["--rot" as string]: "-4deg", animation: "block-drift 7s ease-in-out infinite 0.3s" }}
         aria-hidden
       >
-        <rect x="3" y="3" width="64" height="40" rx="2" fill={stroke} opacity="0.16" />
+        <rect x="3" y="3" width="64" height="40" rx="2" fill="var(--accent-sun)" opacity="0.7" />
         <rect
           x="3"
           y="3"
@@ -361,7 +399,7 @@ function BuildingBlocks() {
           height="40"
           rx="2"
           fill="none"
-          stroke={stroke}
+          stroke="var(--maroon)"
           strokeWidth="1.8"
           strokeLinejoin="round"
           strokeDasharray="220"
@@ -380,14 +418,14 @@ function BuildingBlocks() {
         <path
           d="M6 50 Q50 -6 94 50"
           fill="none"
-          stroke={stroke}
+          stroke="var(--maroon)"
           strokeWidth="1.6"
           strokeLinecap="round"
           strokeDasharray="2 6"
-          opacity="0.75"
+          opacity="0.85"
         />
-        <circle cx="6" cy="50" r="2.4" fill={stroke} />
-        <circle cx="94" cy="50" r="2.4" fill={stroke} />
+        <circle cx="6" cy="50" r="2.6" fill="var(--maroon)" />
+        <circle cx="94" cy="50" r="2.6" fill="var(--maroon)" />
       </svg>
 
       {/* small cross stitch — center upper */}
@@ -401,11 +439,59 @@ function BuildingBlocks() {
       >
         <path
           d="M4 11 L18 11 M11 4 L11 18"
-          stroke={stroke}
-          strokeWidth="1.6"
+          stroke="var(--pink-ink)"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+        />
+      </svg>
+
+      {/* arrow annotation — pointing to blockquote area */}
+      <svg
+        className="pointer-events-none absolute right-[6%] top-[40%] hidden lg:block"
+        width="60"
+        height="80"
+        viewBox="0 0 60 80"
+        aria-hidden
+      >
+        <path
+          d="M50 8 Q42 30 30 44 Q18 56 12 70"
+          fill="none"
+          stroke="var(--accent-tomato)"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeDasharray="180"
+          style={{ ["--len" as string]: "180", animation: "block-draw 2.4s ease-out 1s both" }}
+        />
+        <path
+          d="M12 70 L8 60 M12 70 L20 64"
+          fill="none"
+          stroke="var(--accent-tomato)"
+          strokeWidth="1.8"
           strokeLinecap="round"
         />
       </svg>
     </>
+  );
+}
+
+function SketchUnderline({ color = "var(--accent-tomato)" }: { color?: string }) {
+  return (
+    <svg
+      className="absolute -bottom-1 left-0 w-full"
+      height="8"
+      viewBox="0 0 100 8"
+      preserveAspectRatio="none"
+      aria-hidden
+    >
+      <path
+        d="M1 4 Q15 1 30 4 T60 4 T99 4"
+        fill="none"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeDasharray="200"
+        style={{ ["--len" as string]: "200", animation: "block-draw 1.6s ease-out 0.3s both" }}
+      />
+    </svg>
   );
 }
