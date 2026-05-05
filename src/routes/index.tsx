@@ -60,22 +60,33 @@ function Index() {
       </header>
 
       {/* ───── Hero ───── */}
-      <section id="top" className="hairline-b">
-        <div className="mx-auto max-w-6xl px-6 pb-24 pt-20 lg:px-10 lg:pb-32 lg:pt-28">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-            Graphic designer · Kingston, JA
-          </p>
+      <section id="top" className="hairline-b relative overflow-hidden">
+        {/* colorful accents */}
+        <div className="pointer-events-none absolute -right-20 -top-16 h-72 w-72 rounded-full bg-accent-sun opacity-90 lg:h-[420px] lg:w-[420px]" />
+        <div className="pointer-events-none absolute right-40 top-40 hidden h-3 w-3 rounded-full bg-accent-tomato lg:block" />
+        <div className="pointer-events-none absolute left-[42%] top-24 hidden h-2 w-2 rounded-full bg-forest lg:block" />
+
+        <div className="relative mx-auto max-w-6xl px-6 pb-24 pt-20 lg:px-10 lg:pb-32 lg:pt-28">
+          <div className="flex items-center gap-3">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-tomato" />
+            <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              Graphic designer · Kingston, JA
+            </p>
+          </div>
           <h1 className="mt-8 text-[18vw] leading-[0.85] tracking-[-0.04em] sm:text-[140px] lg:text-[180px]">
-            okiela.
+            okiela<span className="text-accent-tomato">.</span>
           </h1>
           <div className="mt-10 flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
             <p className="max-w-md font-serif text-2xl leading-snug text-foreground lg:text-[28px]">
-              Quiet, considered design — posters, labels, flyers and identity systems made one piece at a time.
+              Quiet, considered design — <span className="text-accent-tomato">posters</span>,{" "}
+              <span className="text-forest">labels</span>,{" "}
+              <span className="text-navy">flyers</span> and{" "}
+              <span className="text-pink-ink">identity systems</span> made one piece at a time.
             </p>
             <div className="flex gap-3">
               <a
                 href="#work"
-                className="hairline rounded-[10px] px-5 py-2.5 text-sm transition-colors hover:bg-foreground hover:text-background"
+                className="hairline rounded-[10px] bg-foreground px-5 py-2.5 text-sm text-background transition-opacity hover:opacity-85"
               >
                 View work
               </a>
@@ -85,6 +96,18 @@ function Index() {
               >
                 Start a project
               </a>
+            </div>
+          </div>
+
+          {/* swatch row */}
+          <div className="mt-16 hairline-t pt-6 flex items-center justify-between">
+            <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+              Working palette
+            </p>
+            <div className="flex items-center gap-2">
+              {["bg-maroon", "bg-amber", "bg-mint", "bg-navy", "bg-pink", "bg-forest", "bg-accent-sun"].map((c) => (
+                <span key={c} className={`h-4 w-4 rounded-full ${c}`} />
+              ))}
             </div>
           </div>
         </div>
