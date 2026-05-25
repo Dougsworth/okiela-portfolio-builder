@@ -414,7 +414,7 @@ function Index() {
           <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
             <div className="lg:col-span-7">
               <h2 className="font-serif text-[20vw] leading-[0.9] tracking-tight sm:text-[120px] lg:text-[160px]">
-                okiela
+                Okiela
                 <span className="transition-colors duration-300" style={{ color: accent }}>
                   .
                 </span>
