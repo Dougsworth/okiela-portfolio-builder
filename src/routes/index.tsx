@@ -118,6 +118,29 @@ function Index() {
   const accent = activeIdx !== null ? PALETTE[activeIdx].color : "var(--accent-tomato)";
   const time = useKingstonTime();
 
+  const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
+  const closeLightbox = () => setLightboxIdx(null);
+  const nextPhoto = () =>
+    setLightboxIdx((i) => (i === null ? null : (i + 1) % photographs.length));
+  const prevPhoto = () =>
+    setLightboxIdx((i) => (i === null ? null : (i - 1 + photographs.length) % photographs.length));
+
+  useEffect(() => {
+    if (lightboxIdx === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      else if (e.key === "ArrowRight") nextPhoto();
+      else if (e.key === "ArrowLeft") prevPhoto();
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [lightboxIdx]);
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       {/* ───── Nav ───── */}
@@ -498,10 +521,12 @@ function Index() {
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-5">
             {photographs.map((p, i) => (
               <figure key={p.src} className="group">
-                <div
-                  className="hairline relative aspect-[3/4] w-full overflow-hidden rounded-[10px]"
+                <button
+                  type="button"
+                  onClick={() => setLightboxIdx(i)}
+                  className="hairline relative block aspect-[3/4] w-full cursor-zoom-in overflow-hidden rounded-[10px] focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
                   style={{ backgroundColor: p.tint }}
-                  aria-label={p.caption}
+                  aria-label={`Open ${p.caption}`}
                 >
                   <img
                     src={p.src}
@@ -512,7 +537,7 @@ function Index() {
                   <span className="absolute bottom-3 left-3 rounded-full bg-background/80 px-2 py-0.5 text-[10px] uppercase tracking-[0.22em] text-foreground/80 tabular-nums backdrop-blur-sm">
                     No. {String(i + 1).padStart(2, "0")}
                   </span>
-                </div>
+                </button>
                 <figcaption className="mt-3 flex items-baseline justify-between text-sm">
                   <span className="text-foreground">{p.caption}</span>
                   <span className="text-muted-foreground">JA</span>
@@ -620,7 +645,138 @@ function Index() {
           </div>
         </div>
       </footer>
+
+      {/* ───── Lightbox ───── */}
+      {lightboxIdx !== null && (
+        <Lightbox
+          idx={lightboxIdx}
+          onClose={closeLightbox}
+          onPrev={prevPhoto}
+          onNext={nextPhoto}
+          onJump={setLightboxIdx}
+        />
+      )}
     </main>
+  );
+}
+
+function Lightbox({
+  idx,
+  onClose,
+  onPrev,
+  onNext,
+  onJump,
+}: {
+  idx: number;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+  onJump: (i: number) => void;
+}) {
+  const photo = photographs[idx];
+  const stop = (e: React.MouseEvent) => e.stopPropagation();
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={photo.caption}
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center px-4 py-6 sm:px-8"
+      style={{
+        background: "color-mix(in oklch, var(--foreground) 90%, transparent)",
+        backdropFilter: "blur(8px)",
+        animation: "fade-in 220ms ease-out",
+      }}
+    >
+      {/* close */}
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close gallery"
+        className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-background/15 text-background backdrop-blur-md transition-colors hover:bg-background/25 sm:right-6 sm:top-6"
+      >
+        <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden>
+          <path d="M4 4 L16 16 M16 4 L4 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        </svg>
+      </button>
+
+      {/* prev */}
+      <button
+        type="button"
+        onClick={(e) => {
+          stop(e);
+          onPrev();
+        }}
+        aria-label="Previous photo"
+        className="absolute left-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-background/15 text-background backdrop-blur-md transition-colors hover:bg-background/25 sm:left-6"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden>
+          <path d="M13 4 L6 10 L13 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        </svg>
+      </button>
+
+      {/* next */}
+      <button
+        type="button"
+        onClick={(e) => {
+          stop(e);
+          onNext();
+        }}
+        aria-label="Next photo"
+        className="absolute right-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-background/15 text-background backdrop-blur-md transition-colors hover:bg-background/25 sm:right-6"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden>
+          <path d="M7 4 L14 10 L7 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        </svg>
+      </button>
+
+      {/* main photo */}
+      <div
+        onClick={stop}
+        className="flex max-h-[70vh] w-full max-w-5xl items-center justify-center"
+      >
+        <img
+          key={photo.src}
+          src={photo.src}
+          alt={photo.caption}
+          className="max-h-[70vh] w-auto max-w-full rounded-[10px] object-contain shadow-2xl"
+          style={{ animation: "lightbox-zoom 320ms cubic-bezier(0.2,0.7,0.2,1)" }}
+        />
+      </div>
+
+      {/* caption + counter */}
+      <div
+        onClick={stop}
+        className="mt-6 flex flex-col items-center gap-1 text-background sm:flex-row sm:gap-4"
+      >
+        <span className="font-serif text-xl sm:text-2xl">{photo.caption}</span>
+        <span className="text-xs uppercase tracking-[0.22em] opacity-70 tabular-nums">
+          {String(idx + 1).padStart(2, "0")} / {String(photographs.length).padStart(2, "0")} · JA
+        </span>
+      </div>
+
+      {/* thumbnail strip */}
+      <div
+        onClick={stop}
+        className="mt-6 flex max-w-full gap-2 overflow-x-auto px-2 pb-2"
+      >
+        {photographs.map((p, i) => (
+          <button
+            key={p.src}
+            type="button"
+            onClick={() => onJump(i)}
+            aria-label={`Show ${p.caption}`}
+            className={`hairline h-14 w-10 shrink-0 overflow-hidden rounded-[4px] transition-opacity ${
+              i === idx ? "opacity-100 ring-2 ring-background" : "opacity-50 hover:opacity-90"
+            }`}
+            style={{ backgroundColor: p.tint }}
+          >
+            <img src={p.src} alt="" className="h-full w-full object-cover" />
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
