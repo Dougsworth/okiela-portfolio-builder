@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 
-type Palette = "maroon" | "mint" | "amber" | "navy" | "pink" | "forest";
+export type Palette = "maroon" | "mint" | "amber" | "navy" | "pink" | "forest";
 
-const bg: Record<Palette, string> = {
+export const tilePaletteBg: Record<Palette, string> = {
   maroon: "bg-maroon",
   mint: "bg-mint",
   amber: "bg-amber",
@@ -11,7 +11,7 @@ const bg: Record<Palette, string> = {
   forest: "bg-forest",
 };
 
-const ink: Record<Palette, string> = {
+export const tilePaletteInk: Record<Palette, string> = {
   maroon: "text-maroon-ink",
   mint: "text-mint-ink",
   amber: "text-amber-ink",
@@ -26,13 +26,18 @@ interface Props {
   category: string;
   year: string;
   children: ReactNode;
+  onClick?: () => void;
 }
 
-export function ProjectTile({ palette, name, category, year, children }: Props) {
+export function ProjectTile({ palette, name, category, year, children, onClick }: Props) {
   return (
-    <div className="group cursor-pointer">
+    <button
+      type="button"
+      onClick={onClick}
+      className="group block w-full cursor-pointer text-left focus:outline-none"
+    >
       <div
-        className={`relative aspect-[3/4] overflow-hidden rounded-[10px] ${bg[palette]} ${ink[palette]} transition-transform duration-500 ease-out group-hover:scale-[1.01]`}
+        className={`relative aspect-[3/4] overflow-hidden rounded-[10px] ${tilePaletteBg[palette]} ${tilePaletteInk[palette]} transition-transform duration-500 ease-out group-hover:scale-[1.01] group-focus-visible:ring-2 group-focus-visible:ring-foreground`}
       >
         <div className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-90">
           {children}
@@ -45,7 +50,7 @@ export function ProjectTile({ palette, name, category, year, children }: Props) 
         </div>
         <p className="text-sm text-muted-foreground tabular-nums">{year}</p>
       </div>
-    </div>
+    </button>
   );
 }
 

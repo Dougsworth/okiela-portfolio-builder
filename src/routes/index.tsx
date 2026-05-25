@@ -8,7 +8,11 @@ import {
   GraphicStudio,
   BBPasteries,
   FieldNotes,
+  tilePaletteBg,
+  tilePaletteInk,
+  type Palette,
 } from "@/components/ProjectTile";
+import type { ComponentType } from "react";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -55,6 +59,139 @@ const availableFor = [
   "Social content",
   "Hand-lettering",
   "Aureacove commissions",
+];
+
+type Project = {
+  no: string;
+  palette: Palette;
+  name: string;
+  category: string;
+  year: string;
+  period: string;
+  role: string;
+  tagline: string;
+  body: string[];
+  deliverables: string[];
+  tools: string[];
+  cta: string;
+  Tile: ComponentType;
+};
+
+const projects: Project[] = [
+  {
+    no: "001",
+    palette: "maroon",
+    name: "The duality of an optimist",
+    category: "Personal manifesto",
+    year: "2026",
+    period: "2024 — ongoing",
+    role: "Concept, art direction, copywriting",
+    tagline:
+      "A personal manifesto exploring the optimist's two minds — quiet curiosity and loud belief — built from posters, short writing and photographic studies.",
+    body: [
+      "Duality began as a sketchbook habit — a way of holding two truths at once: science and superstition, work and play, the river and the deadline.",
+      "The series collects posters, manifestos and photo-essays gathered on walks through Kingston and the Blue Mountains. Some pieces are sold as small prints; others stay in the book.",
+    ],
+    deliverables: ["Poster series", "Manifesto text", "Editorial type", "Photo essays"],
+    tools: ["InDesign", "Photoshop", "Hand-lettering"],
+    cta: "Commission a personal series →",
+    Tile: DualityPoster,
+  },
+  {
+    no: "002",
+    palette: "mint",
+    name: "Aureacove",
+    category: "Jewellery & craft studio",
+    year: "2023 — now",
+    period: "Founded 2023",
+    role: "Founder, designer, photographer, social",
+    tagline:
+      "A handmade jewellery and crafts label — sea-glass, waxed cord and small-batch beadwork, made one piece at a time in Kingston.",
+    body: [
+      "Aureacove started as a summer experiment with sea-glass and waxed cord. It's now a small label of one-of-one and small-batch pieces — bracelets, anklets, pendants and gifts.",
+      "Every piece is made by hand, photographed in natural light and shipped with a handwritten note. Custom orders and small wholesale runs welcome for boutiques, weddings and gift drops.",
+    ],
+    deliverables: ["Brand identity", "Product design", "Wholesale collections", "Custom commissions"],
+    tools: ["Hand fabrication", "Beadwork", "Wire", "Macrame"],
+    cta: "Order a custom piece →",
+    Tile: AureacoveLabel,
+  },
+  {
+    no: "003",
+    palette: "amber",
+    name: "Creative Space",
+    category: "Art tutoring · ages 3–12",
+    year: "2023",
+    period: "Summer 2023",
+    role: "Art tutor & programme designer",
+    tagline:
+      "A summer of teaching children pottery, painting, sewing, beadwork and yard games — the work belonged to them.",
+    body: [
+      "Over a summer at Creative Space I taught children across a range of crafts: pottery, painting (oil and watercolour), drawing, sewing, beaded jewellery and collage.",
+      "When we weren't making, we were outside dancing, singing and inventing yard games. The aim was always the same — let the work be theirs, and meet each child where they are.",
+    ],
+    deliverables: ["Weekly lesson plans", "Materials sourcing", "Day-of facilitation"],
+    tools: ["Clay", "Oil & watercolour", "Beads", "Patience"],
+    cta: "Run a workshop with me →",
+    Tile: CreativeSpaceFlyer,
+  },
+  {
+    no: "004",
+    palette: "navy",
+    name: "Mark making",
+    category: "Logos & identity systems",
+    year: "2024 — 2025",
+    period: "Ongoing studio practice",
+    role: "Graphic designer, art director",
+    tagline:
+      "Wordmarks, logo systems and one-page brand sheets for small studios, shops and family businesses — quiet brands made carefully.",
+    body: [
+      "Identity work for Aurea Cove, Ethereal Motif, Herblunts, Eternal Fair Angel and others — quiet brands made for quiet businesses.",
+      "Each system starts with a conversation and a sketchbook. Most clients leave with a wordmark, a small palette, a one-page brand sheet and a handful of flexible asset templates they can run with on their own.",
+    ],
+    deliverables: ["Logos", "Wordmarks", "Brand sheets", "Packaging concepts"],
+    tools: ["Canva", "Adobe Express", "Hand-lettering"],
+    cta: "Commission an identity →",
+    Tile: GraphicStudio,
+  },
+  {
+    no: "005",
+    palette: "pink",
+    name: "B & B Pasteries",
+    category: "Family bakery · decorator",
+    year: "2018 — 2021",
+    period: "Three years (school holidays + weekends)",
+    role: "Decorator, packager, inventory",
+    tagline:
+      "Three years of decorating cakes, packing orders and keeping the cupboards counted at my dad's bakery — the small disciplines that run through everything I make.",
+    body: [
+      "B&B was my dad's bakery, and where I learned the small disciplines that run through everything I make: care for the order, care for the customer, care for the count.",
+      "Three years of decorating birthday cakes, packing dozens of cupcakes for orders, and keeping the cupboards stocked. Quiet hands-on apprenticeship in a working family business.",
+    ],
+    deliverables: ["Cake decoration", "Order packaging", "Inventory tracking"],
+    tools: ["Piping bags", "Royal icing", "Brown paper & string"],
+    cta: "Decorate a small order →",
+    Tile: BBPasteries,
+  },
+  {
+    no: "006",
+    palette: "forest",
+    name: "Field notes",
+    category: "Botanical photography",
+    year: "Ongoing",
+    period: "Open archive",
+    role: "Photographer",
+    tagline:
+      "An open archive of small things — leaves after rain, light through a stream, mountains at first light, the bird who keeps coming back.",
+    body: [
+      "An open archive of small things — leaves after rain, light through a stream, mountains at first light, the garden bird who keeps coming back.",
+      "Photos are taken on hikes, beach trips and quiet mornings, usually with whichever camera is in my pocket. The full set lives in the Photography section above; selected prints are available on request.",
+    ],
+    deliverables: ["Field photographs", "Stock imagery", "Open-edition prints"],
+    tools: ["iPhone", "Natural light", "Slow looking"],
+    cta: "Commission a shoot →",
+    Tile: FieldNotes,
+  },
 ];
 
 const photographs: { caption: string; src: string; tint: string }[] = [
@@ -140,6 +277,29 @@ function Index() {
       window.removeEventListener("keydown", onKey);
     };
   }, [lightboxIdx]);
+
+  const [projectIdx, setProjectIdx] = useState<number | null>(null);
+  const closeProject = () => setProjectIdx(null);
+  const nextProject = () =>
+    setProjectIdx((i) => (i === null ? null : (i + 1) % projects.length));
+  const prevProject = () =>
+    setProjectIdx((i) => (i === null ? null : (i - 1 + projects.length) % projects.length));
+
+  useEffect(() => {
+    if (projectIdx === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeProject();
+      else if (e.key === "ArrowRight") nextProject();
+      else if (e.key === "ArrowLeft") prevProject();
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [projectIdx]);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -484,24 +644,18 @@ function Index() {
           </div>
 
           <div className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:gap-x-10 lg:gap-y-20">
-            <ProjectTile palette="maroon" name="The duality of an optimist" category="Personal manifesto" year="2026">
-              <DualityPoster />
-            </ProjectTile>
-            <ProjectTile palette="mint" name="Aureacove" category="Jewellery & craft studio" year="2023 — now">
-              <AureacoveLabel />
-            </ProjectTile>
-            <ProjectTile palette="amber" name="Creative Space" category="Art tutoring · ages 3–12" year="2023">
-              <CreativeSpaceFlyer />
-            </ProjectTile>
-            <ProjectTile palette="navy" name="Mark making" category="Logos & identity systems" year="2024 — 2025">
-              <GraphicStudio />
-            </ProjectTile>
-            <ProjectTile palette="pink" name="B & B Pasteries" category="Family bakery · decorator" year="2018 — 2021">
-              <BBPasteries />
-            </ProjectTile>
-            <ProjectTile palette="forest" name="Field notes" category="Botanical photography" year="Ongoing">
-              <FieldNotes />
-            </ProjectTile>
+            {projects.map((p, i) => (
+              <ProjectTile
+                key={p.no}
+                palette={p.palette}
+                name={p.name}
+                category={p.category}
+                year={p.year}
+                onClick={() => setProjectIdx(i)}
+              >
+                <p.Tile />
+              </ProjectTile>
+            ))}
           </div>
         </div>
       </section>
@@ -656,7 +810,168 @@ function Index() {
           onJump={setLightboxIdx}
         />
       )}
+
+      {/* ───── Project modal ───── */}
+      {projectIdx !== null && (
+        <ProjectModal
+          project={projects[projectIdx]}
+          onClose={closeProject}
+          onPrev={prevProject}
+          onNext={nextProject}
+        />
+      )}
     </main>
+  );
+}
+
+function ProjectModal({
+  project,
+  onClose,
+  onPrev,
+  onNext,
+}: {
+  project: Project;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
+  const stop = (e: React.MouseEvent) => e.stopPropagation();
+  const Tile = project.Tile;
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={project.name}
+      onClick={onClose}
+      className="fixed inset-0 z-50 overflow-y-auto bg-foreground/85 backdrop-blur-sm"
+      style={{ animation: "fade-in 240ms ease-out" }}
+    >
+      <div className="flex min-h-full items-start justify-center p-3 sm:p-6 lg:p-10">
+        <article
+          onClick={stop}
+          className="relative w-full max-w-5xl overflow-hidden rounded-[16px] bg-background text-foreground shadow-2xl"
+          style={{ animation: "lightbox-zoom 360ms cubic-bezier(0.2,0.7,0.2,1)" }}
+        >
+          {/* Top bar */}
+          <div className="hairline-b sticky top-0 z-10 flex items-center justify-between gap-3 bg-background/95 px-5 py-3 backdrop-blur-md sm:px-7">
+            <div className="flex items-center gap-2.5 text-[10px] uppercase tracking-[0.22em] text-muted-foreground tabular-nums">
+              <span className={`h-2 w-2 rounded-full ${tilePaletteBg[project.palette]}`} />
+              <span>No. {project.no}</span>
+              <span aria-hidden>·</span>
+              <span>{project.category}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={onPrev}
+                aria-label="Previous project"
+                className="hairline inline-flex h-9 w-9 items-center justify-center rounded-full text-foreground transition-colors hover:bg-secondary"
+              >
+                <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden>
+                  <path d="M13 4 L6 10 L13 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={onNext}
+                aria-label="Next project"
+                className="hairline inline-flex h-9 w-9 items-center justify-center rounded-full text-foreground transition-colors hover:bg-secondary"
+              >
+                <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden>
+                  <path d="M7 4 L14 10 L7 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Close project"
+                className="hairline ml-1.5 inline-flex h-9 w-9 items-center justify-center rounded-full text-foreground transition-colors hover:bg-secondary"
+              >
+                <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden>
+                  <path d="M4 4 L16 16 M16 4 L4 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Body */}
+          <div className="px-5 py-10 sm:px-10 sm:py-14 lg:px-16 lg:py-20">
+            <p className="font-sketch text-lg text-muted-foreground">{project.year}</p>
+            <h1 className="mt-3 font-serif text-4xl leading-[0.98] tracking-tight sm:text-5xl lg:text-6xl">
+              {project.name}
+            </h1>
+            <p className="mt-6 max-w-3xl font-serif text-xl leading-snug text-foreground/85 sm:text-2xl">
+              {project.tagline}
+            </p>
+
+            {/* Hero visual */}
+            <div
+              className={`mt-12 relative aspect-[16/9] overflow-hidden rounded-[12px] ${tilePaletteBg[project.palette]} ${tilePaletteInk[project.palette]}`}
+            >
+              <div className="absolute inset-0 scale-[1.2]">
+                <Tile />
+              </div>
+            </div>
+
+            {/* Two-column: meta + body */}
+            <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-10 lg:grid-cols-12">
+              <aside className="space-y-8 lg:col-span-4">
+                <MetaRow label="Role" value={project.role} />
+                <MetaRow label="Period" value={project.period} />
+                <MetaRow label="Deliverables" values={project.deliverables} />
+                <MetaRow label="Tools" values={project.tools} />
+              </aside>
+              <div className="space-y-5 lg:col-span-8">
+                {project.body.map((para) => (
+                  <p key={para} className="font-serif text-lg leading-relaxed text-foreground/90 sm:text-xl">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="hairline-t mt-16 grid grid-cols-1 gap-6 pt-10 sm:grid-cols-12 sm:items-end">
+              <div className="sm:col-span-8">
+                <p className="font-sketch text-xl text-muted-foreground">Want something like this?</p>
+                <h3 className="mt-3 font-serif text-2xl leading-tight sm:text-3xl">
+                  Send a brief and I'll suggest a shape and a price.
+                </h3>
+              </div>
+              <a
+                href={`${MAILTO}%20%E2%80%94%20${encodeURIComponent(project.name)}`}
+                className="hairline inline-flex items-center justify-between gap-3 rounded-[10px] bg-foreground px-5 py-3 text-sm text-background transition-opacity hover:opacity-85 sm:col-span-4"
+              >
+                <span>{project.cta}</span>
+                <ArrowRight />
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  );
+}
+
+function MetaRow({ label, value, values }: { label: string; value?: string; values?: string[] }) {
+  return (
+    <div>
+      <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">{label}</p>
+      {value && <p className="mt-2 font-serif text-lg leading-snug">{value}</p>}
+      {values && (
+        <ul className="mt-2 flex flex-wrap gap-1.5">
+          {values.map((v) => (
+            <li
+              key={v}
+              className="hairline rounded-full px-2 py-0.5 text-[11px] text-muted-foreground"
+            >
+              {v}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 
