@@ -54,7 +54,7 @@ const services = [
   {
     n: "01",
     title: "Brand identity",
-    body: "Wordmarks, logos and small identity systems for studios, shops and family businesses.",
+    body: "Wordmarks, logos and identity systems for studios, brands and teams.",
     deliverables: ["Logo", "Wordmark", "Brand sheet"],
     dot: "bg-navy",
   },
@@ -196,9 +196,9 @@ const projects: Project[] = [
     period: "Ongoing studio practice",
     role: "Graphic designer, art director",
     tagline:
-      "Wordmarks, logo systems and one-page brand sheets for small studios, shops and family businesses — quiet brands made carefully.",
+      "Wordmarks, logo systems and one-page brand sheets for studios, brands and teams — identities made carefully.",
     body: [
-      "Identity work for Aurea Cove, Ethereal Motif, Herblunts, Eternal Fair Angel and others — quiet brands made for quiet businesses.",
+      "Identity work for Aurea Cove, Ethereal Motif, Herblunts, Eternal Fair Angel and others — each made with the same care.",
       "Each system starts with a conversation and a sketchbook. Most clients leave with a wordmark, a small palette, a one-page brand sheet and a handful of flexible asset templates they can run with on their own.",
     ],
     deliverables: ["Logos", "Wordmarks", "Brand sheets", "Packaging concepts"],
@@ -460,7 +460,7 @@ function Index() {
           {/* two-column intro — okiela. sketch wordmark + right column copy */}
           <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
             <div className="lg:col-span-7 lg:flex lg:flex-col lg:justify-between lg:gap-10">
-              <Dualities />
+              <HeroProof />
               <h2 className="mt-10 font-serif text-[20vw] leading-[0.9] tracking-tight sm:text-[120px] lg:mt-0 lg:text-[160px]">
                 Okiela
                 <span className="transition-colors duration-300" style={{ color: accent }}>
@@ -472,7 +472,7 @@ function Index() {
               <p className="max-w-md font-serif text-xl leading-snug text-foreground sm:text-2xl">
                 <span className="text-navy">Brand identity</span>,{" "}
                 <span className="text-forest">photography</span> and handmade{" "}
-                <span className="text-pink-ink">Aureacove jewellery</span> for small studios, shops and personal projects.
+                <span className="text-pink-ink">Aureacove jewellery</span> for brands, studios and personal projects.
               </p>
               <p className="mt-3 max-w-md text-sm text-muted-foreground">
                 Based in Kingston, Jamaica — open to full-time roles, internships and freelance commissions.
@@ -633,8 +633,8 @@ function Index() {
           <div className="mt-20 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-3">
             {[
               { n: "2023", l: "Aureacove est.", color: "var(--accent-tomato)", icon: "pencil" as const },
-              { n: "20+", l: "client projects shipped", color: "var(--forest)", icon: "book" as const },
-              { n: "BSc", l: "biological science, UWI Mona", color: "var(--navy)", icon: "spark" as const },
+              { n: "nuff", l: "client projects shipped", color: "var(--forest)", icon: "book" as const },
+              { n: "BSc", l: "biological science, UWI Mona", color: "var(--navy)", icon: "stethoscope" as const },
             ].map((s) => (
               <div key={s.l} className="relative">
                 <div className="flex items-baseline gap-3">
@@ -682,7 +682,7 @@ function Index() {
             <p className="font-sketch text-lg text-muted-foreground">things you can hire me to make</p>
           </div>
           <p className="mb-12 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Four focused offerings — each available as a one-off piece or a small ongoing package. Briefs from small studios, shops, restaurants, weddings and personal projects all welcome.
+            Four focused offerings — each available as a one-off piece or an ongoing package. Briefs from brands, studios, restaurants, weddings and personal projects all welcome.
           </p>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
@@ -1377,10 +1377,10 @@ function Compass() {
   );
 }
 
-function StatIcon({ type, color }: { type: "pencil" | "book" | "spark"; color: string }) {
+function StatIcon({ type, color }: { type: "pencil" | "book" | "stethoscope"; color: string }) {
   const common = {
-    width: 28,
-    height: 28,
+    width: 36,
+    height: 36,
     viewBox: "0 0 32 32",
     fill: "none" as const,
     stroke: color,
@@ -1414,13 +1414,23 @@ function StatIcon({ type, color }: { type: "pencil" | "book" | "spark"; color: s
       </svg>
     );
   }
+  // stethoscope — clinical / veterinary mark
   return (
     <svg
       {...common}
       aria-hidden
-      style={{ animation: "block-spin-slow 18s linear infinite" }}
+      style={{ animation: "block-drift 5s ease-in-out infinite", ["--rot" as string]: "-6deg" }}
     >
-      <path d="M16 4 L18 14 L28 16 L18 18 L16 28 L14 18 L4 16 L14 14 Z" fill={color} stroke="none" opacity="0.9" />
+      {/* binaural tubing */}
+      <path d="M9 6 C8.2 13 12 15 13 15.6 C14 15 17.8 13 17 6" />
+      {/* earpiece tips */}
+      <circle cx="9" cy="5.6" r="1.4" fill={color} stroke="none" />
+      <circle cx="17" cy="5.6" r="1.4" fill={color} stroke="none" />
+      {/* tube down to the chestpiece */}
+      <path d="M13 15.6 C13 21.5 15.5 24.5 19 24.5" />
+      {/* chestpiece */}
+      <circle cx="22.4" cy="24" r="3.6" />
+      <circle cx="22.4" cy="24" r="1.2" fill={color} stroke="none" />
     </svg>
   );
 }
@@ -1583,26 +1593,50 @@ function BuildingBlocks() {
   );
 }
 
-function Dualities() {
+function HeroProof() {
   const reveal = (delay: number) => ({
     animation: "fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both",
     animationDelay: `${delay}s`,
   });
   return (
-    <div className="max-w-sm">
-      <p className="font-serif text-2xl leading-snug text-foreground/85 sm:text-3xl lg:text-4xl">
-        <span className="inline-block" style={reveal(0.1)}>Two</span>{" "}
-        <span className="inline-block" style={reveal(0.28)}>minds.</span>
+    <div className="max-w-md">
+      {/* positioning line — what the work is about, in her own words */}
+      <p
+        className="font-serif text-2xl leading-snug text-foreground/85 sm:text-3xl lg:text-4xl"
+        style={reveal(0.1)}
+      >
+        &ldquo;Considered work,
         <br />
-        <span className="inline-block text-accent-tomato" style={reveal(0.6)}>One</span>{" "}
-        <span
-          className="relative inline-block text-accent-tomato"
-          style={reveal(0.8)}
-        >
-          hand.
+        <span className="relative inline-block text-accent-tomato">
+          made by hand.
           <SketchUnderline color="var(--accent-tomato)" />
         </span>
+        &rdquo;
       </p>
+
+      {/* social proof — real client names, pulled from the work */}
+      <div className="mt-7" style={reveal(0.4)}>
+        <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+          Trusted by
+        </p>
+        <p className="mt-2 max-w-sm font-serif text-lg leading-snug text-foreground sm:text-xl">
+          Aurea Cove · Herblunts · Ethereal Motif · Eternal Fair Angel
+        </p>
+      </div>
+
+      {/* availability — the thing a hiring manager is scanning for */}
+      <div
+        className="hairline mt-6 inline-flex items-center gap-2 rounded-full bg-card px-3.5 py-1.5"
+        style={reveal(0.6)}
+      >
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-forest opacity-60" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-forest" />
+        </span>
+        <span className="text-xs text-muted-foreground">
+          Open to roles &amp; commissions
+        </span>
+      </div>
     </div>
   );
 }

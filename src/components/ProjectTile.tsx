@@ -162,7 +162,7 @@ export function GraphicStudio() {
       <div>
         <div className="font-serif text-[56px] leading-none">OH.</div>
         <p className="mt-3 text-[11px] leading-relaxed opacity-80 max-w-[80%]">
-          Wordmarks and small identity systems for studios, shops and quiet brands.
+          Wordmarks and identity systems for studios, brands and teams.
         </p>
       </div>
       <div className="hairline-t pt-3 flex justify-between text-[10px] uppercase tracking-[0.2em] opacity-70">

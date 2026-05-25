@@ -130,6 +130,28 @@
   }
   html {
     scroll-behavior: smooth;
+    /* gentle section-by-section snapping: the next section's top is pulled
+       into view as you scroll toward it, but tall sections still scroll
+       freely (proximity, not mandatory, so nothing traps the reader). */
+    scroll-snap-type: y proximity;
+    /* offset snap + anchor jumps so section tops clear the two-row mobile
+       sticky header (single-row header on md+ below). */
+    scroll-padding-top: 6.5rem;
+  }
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 5rem;
+    }
+  }
+  main > section,
+  main > footer {
+    scroll-snap-align: start;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+      scroll-snap-type: none;
+    }
   }
   body {
     background-color: var(--color-background);
