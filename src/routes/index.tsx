@@ -353,8 +353,8 @@ function Index() {
           <nav className="hidden gap-7 text-sm text-muted-foreground md:flex">
             <a href="#about" className="transition-colors hover:text-foreground">About</a>
             <a href="#services" className="transition-colors hover:text-foreground">Services</a>
-            <a href="#work" className="transition-colors hover:text-foreground">Work</a>
             <a href="#photography" className="transition-colors hover:text-foreground">Photography</a>
+            <a href="#work" className="transition-colors hover:text-foreground">Work</a>
             <a href="#experience" className="transition-colors hover:text-foreground">CV</a>
             <a href="#contact" className="transition-colors hover:text-foreground">Contact</a>
           </nav>
@@ -374,8 +374,8 @@ function Index() {
         <nav className="hairline-t mx-auto flex max-w-6xl items-center justify-between gap-3 overflow-x-auto px-5 py-3 text-xs text-muted-foreground md:hidden">
           <a href="#about" className="transition-colors hover:text-foreground">About</a>
           <a href="#services" className="transition-colors hover:text-foreground">Services</a>
-          <a href="#work" className="transition-colors hover:text-foreground">Work</a>
           <a href="#photography" className="transition-colors hover:text-foreground">Photo</a>
+          <a href="#work" className="transition-colors hover:text-foreground">Work</a>
           <a href="#experience" className="transition-colors hover:text-foreground">CV</a>
           <a href="#contact" className="transition-colors hover:text-foreground">Contact</a>
         </nav>
@@ -616,8 +616,11 @@ function Index() {
       {/* ───── Services — hireable, named, scannable ───── */}
       <section id="services" className="hairline-b">
         <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
-          <div className="mb-6 flex items-baseline justify-between">
-            <p className="font-sketch text-2xl text-foreground lg:text-3xl">services</p>
+          <div className="mb-6 flex items-baseline justify-between gap-3">
+            <p className="flex items-center gap-3 font-sketch text-2xl text-foreground lg:text-3xl">
+              <SketchSparkle color="var(--accent-sun)" />
+              services
+            </p>
             <p className="font-sketch text-lg text-muted-foreground">things you can hire me to make</p>
           </div>
           <p className="mb-12 max-w-2xl text-base leading-relaxed text-muted-foreground">
@@ -675,41 +678,19 @@ function Index() {
         </div>
       </section>
 
-      {/* ───── Selected work ───── */}
-      <section id="work" className="hairline-b">
-        <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
-          <div className="mb-14 flex items-baseline justify-between">
-            <p className="font-sketch text-2xl text-foreground lg:text-3xl">selected work</p>
-            <p className="font-sketch text-lg text-muted-foreground">2018 — 2026</p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:gap-x-10 lg:gap-y-20">
-            {projects.map((p, i) => (
-              <ProjectTile
-                key={p.no}
-                palette={p.palette}
-                name={p.name}
-                category={p.category}
-                year={p.year}
-                onClick={() => setProjectIdx(i)}
-              >
-                <p.Tile />
-              </ProjectTile>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ───── Photography ───── */}
       <section id="photography" className="hairline-b">
         <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
-          <div className="mb-6 flex items-baseline justify-between">
-            <p className="font-sketch text-2xl text-foreground lg:text-3xl">photography</p>
+          <div className="mb-6 flex items-baseline justify-between gap-3">
+            <p className="flex items-center gap-3 font-sketch text-2xl text-foreground lg:text-3xl">
+              <SketchCamera color="var(--navy)" />
+              photography
+            </p>
             <p className="font-sketch text-lg text-muted-foreground">a slow walk through the island</p>
           </div>
 
           <p className="mb-12 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Field photography from hikes, beaches and small things — gathered between Blue Mountain mornings, Hellshire bonfires and the garden behind the studio.
+            Field photography from hikes, beaches and small things — gathered between Blue Mountain mornings, Hellshire bonfires and the garden behind the studio. <span className="font-sketch text-foreground/80">↗ click any photo</span>
           </p>
 
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-5">
@@ -742,11 +723,42 @@ function Index() {
         </div>
       </section>
 
+      {/* ───── Selected work ───── */}
+      <section id="work" className="hairline-b">
+        <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
+          <div className="mb-14 flex items-baseline justify-between gap-3">
+            <p className="flex items-center gap-3 font-sketch text-2xl text-foreground lg:text-3xl">
+              <SketchFlower color="var(--accent-tomato)" />
+              selected work
+            </p>
+            <p className="font-sketch text-lg text-muted-foreground">2018 — 2026</p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:gap-x-10 lg:gap-y-20">
+            {projects.map((p, i) => (
+              <ProjectTile
+                key={p.no}
+                palette={p.palette}
+                name={p.name}
+                category={p.category}
+                year={p.year}
+                onClick={() => setProjectIdx(i)}
+              >
+                <p.Tile />
+              </ProjectTile>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ───── Experience ───── */}
       <section id="experience" className="hairline-b">
         <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
-          <div className="mb-14 flex items-baseline justify-between">
-            <p className="font-sketch text-2xl text-foreground lg:text-3xl">experience &amp; study</p>
+          <div className="mb-14 flex items-baseline justify-between gap-3">
+            <p className="flex items-center gap-3 font-sketch text-2xl text-foreground lg:text-3xl">
+              <SketchPencil color="var(--maroon)" />
+              experience &amp; study
+            </p>
             <p className="font-sketch text-lg text-muted-foreground">a working CV</p>
           </div>
 
@@ -1461,6 +1473,89 @@ function BuildingBlocks() {
         />
       </svg>
     </>
+  );
+}
+
+function SketchSparkle({ color = "var(--accent-sun)", size = 22 }: { color?: string; size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      aria-hidden
+      style={{ animation: "block-spin-slow 22s linear infinite" }}
+    >
+      <path
+        d="M12 2 L13.6 10.4 L22 12 L13.6 13.6 L12 22 L10.4 13.6 L2 12 L10.4 10.4 Z"
+        fill={color}
+        opacity="0.9"
+      />
+    </svg>
+  );
+}
+
+function SketchCamera({ color = "var(--navy)" }: { color?: string }) {
+  return (
+    <svg
+      width="28"
+      height="22"
+      viewBox="0 0 32 26"
+      aria-hidden
+      style={{ ["--rot" as string]: "-6deg", animation: "block-drift 6s ease-in-out infinite" }}
+    >
+      <path
+        d="M3 8 L9 8 L11 4 L21 4 L23 8 L29 8 L29 23 L3 23 Z"
+        fill="none"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+      <circle cx="16" cy="15" r="5" fill="none" stroke={color} strokeWidth="1.5" />
+      <circle cx="16" cy="15" r="1.8" fill={color} />
+      <rect x="22" y="9.4" width="3" height="1.5" rx="0.6" fill={color} />
+    </svg>
+  );
+}
+
+function SketchFlower({ color = "var(--accent-tomato)" }: { color?: string }) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      aria-hidden
+      style={{ animation: "block-spin-slow 28s linear infinite" }}
+    >
+      <circle cx="12" cy="5.5" r="3" fill={color} opacity="0.85" />
+      <circle cx="18.5" cy="12" r="3" fill={color} opacity="0.85" />
+      <circle cx="12" cy="18.5" r="3" fill={color} opacity="0.85" />
+      <circle cx="5.5" cy="12" r="3" fill={color} opacity="0.85" />
+      <circle cx="12" cy="12" r="2.4" fill="var(--accent-sun)" />
+    </svg>
+  );
+}
+
+function SketchPencil({ color = "var(--maroon)" }: { color?: string }) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      aria-hidden
+      style={{ ["--rot" as string]: "-14deg", animation: "block-drift 5s ease-in-out infinite" }}
+    >
+      <path
+        d="M3 21 L6 18 L17 7 L20 10 L9 21 Z"
+        fill="none"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+      <path d="M16 6 L19 9" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M3 21 L6 18" stroke={color} strokeWidth="2.2" strokeLinecap="round" />
+    </svg>
   );
 }
 
