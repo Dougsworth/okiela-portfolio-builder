@@ -131,10 +131,10 @@ const projects: Project[] = [
     cta: "Commission a personal series →",
     Tile: DualityPoster,
     images: [
-      U("1517077304055-6e89abbf09b0"),
-      U("1499750310107-5fef28a66643"),
-      U("1455390582262-044cdead277a"),
-      U("1483546363825-7ebf25fb7513"),
+      "/photos/photo-1.jpeg",
+      "/photos/photo-3.jpeg",
+      "/photos/photo-8.jpeg",
+      "/photos/photo-9.jpeg",
     ],
   },
   {
@@ -206,10 +206,12 @@ const projects: Project[] = [
     cta: "Commission an identity →",
     Tile: GraphicStudio,
     images: [
-      U("1561070791-2526d30994b8"),
-      U("1454165804606-c3d57bc86b40"),
-      U("1517677129300-07b130802f46"),
-      U("1559136555-9303baea8ebd"),
+      "/photos/ma-relaxant.jpeg",
+      "/photos/ma-immune.jpeg",
+      "/photos/vlo-libido.jpeg",
+      "/photos/ma-uterine.jpeg",
+      "/photos/vlo-rmony.jpeg",
+      "/photos/vlo-memory.jpeg",
     ],
   },
   {
