@@ -12,12 +12,12 @@ export const tilePaletteBg: Record<Palette, string> = {
 };
 
 export const tilePaletteInk: Record<Palette, string> = {
-  maroon: "text-maroon-ink",
+  maroon: "text-background",
   mint: "text-mint-ink",
   amber: "text-amber-ink",
-  navy: "text-navy-ink",
+  navy: "text-background",
   pink: "text-pink-ink",
-  forest: "text-forest-ink",
+  forest: "text-background",
 };
 
 interface Props {
