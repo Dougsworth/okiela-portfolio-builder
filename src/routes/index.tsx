@@ -21,6 +21,35 @@ export const Route = createFileRoute("/")({
 const EMAIL = "okielahenry05@gmail.com";
 const MAILTO = `mailto:${EMAIL}?subject=Inquiry%20%E2%80%94%20Okiela`;
 
+// ─── Profile & contact ───────────────────────────────────────────────
+// Edit these in one place. Leave a field as "" and its link is hidden.
+const PROFILE = {
+  name: "Okiela Henry",
+  title: "Designer · Photographer · Jeweller",
+  location: "Kingston, Jamaica",
+  email: EMAIL,
+  phone: "876-507-9093",
+  linkedin: "", // full URL, e.g. "https://www.linkedin.com/in/okielahenry"
+  instagram: "", // full URL, e.g. "https://instagram.com/aureacove"
+  portfolio: "", // live site URL, e.g. "https://okiela.com"
+};
+
+// CV is shared on request rather than published — opens a pre-filled email.
+const CV_MAILTO = `mailto:${EMAIL}?subject=${encodeURIComponent(
+  "CV / résumé request — Okiela Henry",
+)}&body=${encodeURIComponent(
+  "Hi Okiela,\n\nI came across your portfolio and would love to see your CV / résumé.\n\n",
+)}`;
+
+// Built into ordered footer / résumé links; only non-empty entries render.
+const LINKS: { label: string; href: string; display: string }[] = [
+  PROFILE.email && { label: "Email", href: MAILTO, display: PROFILE.email },
+  PROFILE.phone && { label: "Phone", href: `tel:${PROFILE.phone.replace(/[^+\d]/g, "")}`, display: PROFILE.phone },
+  PROFILE.linkedin && { label: "LinkedIn", href: PROFILE.linkedin, display: "LinkedIn" },
+  PROFILE.instagram && { label: "Instagram", href: PROFILE.instagram, display: "Instagram" },
+  PROFILE.portfolio && { label: "Portfolio", href: PROFILE.portfolio, display: PROFILE.portfolio.replace(/^https?:\/\//, "") },
+].filter(Boolean) as { label: string; href: string; display: string }[];
+
 const services = [
   {
     n: "01",
@@ -249,14 +278,14 @@ const photographs: { caption: string; src: string; tint: string }[] = [
 
 const experience = [
   { year: "2025 — now", role: "BSc, Biological Science", at: "University of the West Indies, Mona" },
-  { year: "2025", role: "Mixologist · Creative Director", at: "Dub Bar · Trini Yaad" },
-  { year: "2025", role: "Graphic Designer · Secretary", at: "Armbandsplus" },
+  { year: "2025 — 2026", role: "Server · Mixologist · Creative Director", at: "Trini Yaad · Dub Bar · Dubwise Café" },
+  { year: "2025", role: "Graphic Designer · Receptionist", at: "Armbands Plus · Earth Retail" },
   { year: "2024", role: "Sales Agent", at: "Hinduja Global Solutions" },
   { year: "2023", role: "Art Tutor", at: "Creative Space" },
   { year: "2022", role: "Inventory Manager", at: "Little Tokyo" },
-  { year: "2022 — 2024", role: "CAPE — Biology, Chem, Physics", at: "Pre-University School" },
-  { year: "2018 — 2021", role: "Decorator · Inventory", at: "B & B Pasteries" },
-  { year: "2017 — 2022", role: "8 CSEC · 2 City & Guilds", at: "Kingston Technical High School" },
+  { year: "2022 — 2024", role: "CAPE — Biology, Chemistry, Caribbean Civ.", at: "Pre-University School" },
+  { year: "2018 — 2021", role: "Decorator · Inventory Manager", at: "B & B Pasteries" },
+  { year: "2017 — 2022", role: "9 CSEC · 2 City & Guilds", at: "Kingston Technical High School" },
 ];
 
 const PALETTE = [
@@ -365,10 +394,17 @@ function Index() {
               KIN {time}
             </span>
             <a
-              href={MAILTO}
-              className="hairline rounded-[8px] px-3.5 py-2 text-xs transition-opacity hover:opacity-70"
+              href={CV_MAILTO}
+              className="hairline hidden items-center gap-1.5 rounded-[8px] px-3.5 py-2 text-xs transition-opacity hover:opacity-70 sm:inline-flex"
             >
-              Available
+              <MailIcon />
+              Request CV
+            </a>
+            <a
+              href={MAILTO}
+              className="hairline rounded-[8px] bg-foreground px-3.5 py-2 text-xs text-background transition-opacity hover:opacity-85"
+            >
+              Get in touch
             </a>
           </div>
         </div>
@@ -428,7 +464,7 @@ function Index() {
                 <span className="text-pink-ink">Aureacove jewellery</span> for small studios, shops and personal projects.
               </p>
               <p className="mt-3 max-w-md text-sm text-muted-foreground">
-                Now taking commissions from Kingston, Jamaica — fixed-price packages or one-off pieces.
+                Based in Kingston, Jamaica — open to full-time roles, internships and freelance commissions.
               </p>
               <div className="mt-5 flex flex-wrap gap-1.5">
                 {availableFor.map((tag) => (
@@ -440,12 +476,19 @@ function Index() {
                   </span>
                 ))}
               </div>
-              <div className="mt-6 flex gap-3">
+              <div className="mt-6 flex flex-wrap gap-3">
                 <a
-                  href="#services"
+                  href={MAILTO}
                   className="hairline rounded-[10px] bg-foreground px-5 py-3 text-sm text-background transition-opacity hover:opacity-85"
                 >
-                  Hire me
+                  Get in touch
+                </a>
+                <a
+                  href={CV_MAILTO}
+                  className="hairline inline-flex items-center gap-2 rounded-[10px] px-5 py-3 text-sm transition-colors hover:bg-foreground hover:text-background"
+                >
+                  <MailIcon />
+                  Request CV
                 </a>
                 <a
                   href="#work"
@@ -761,7 +804,13 @@ function Index() {
               <SketchPencil color="var(--maroon)" />
               experience &amp; study
             </p>
-            <p className="font-sketch text-lg text-muted-foreground">a working CV</p>
+            <a
+              href={CV_MAILTO}
+              className="hairline inline-flex shrink-0 items-center gap-2 rounded-[10px] px-4 py-2.5 text-sm transition-colors hover:bg-foreground hover:text-background"
+            >
+              <MailIcon />
+              Request full CV
+            </a>
           </div>
 
           <ol className="grid grid-cols-1">
@@ -787,8 +836,8 @@ function Index() {
 
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3">
             {[
-              { k: "8", v: "CSEC passes" },
-              { k: "6", v: "CAPE results" },
+              { k: "9", v: "CSEC passes" },
+              { k: "5", v: "CAPE passes" },
               { k: "2", v: "City & Guilds" },
             ].map((s) => (
               <div key={s.v} className="hairline rounded-[10px] bg-card p-5">
@@ -818,11 +867,30 @@ function Index() {
             <ArrowRight />
           </a>
 
+          <div className="mt-6 flex flex-col gap-2 text-base text-muted-foreground lg:text-lg">
+            <a
+              href={MAILTO}
+              className="break-words transition-colors hover:text-foreground"
+            >
+              {EMAIL}
+            </a>
+            {PROFILE.phone && (
+              <a
+                href={`tel:${PROFILE.phone.replace(/[^+\d]/g, "")}`}
+                className="transition-colors hover:text-foreground"
+              >
+                {PROFILE.phone}
+              </a>
+            )}
+            <span>{PROFILE.location}</span>
+          </div>
+
           <a
-            href={MAILTO}
-            className="mt-6 block break-words text-base text-muted-foreground transition-colors hover:text-foreground lg:text-lg"
+            href={CV_MAILTO}
+            className="hairline mt-8 inline-flex items-center gap-2 rounded-[10px] px-5 py-3 text-sm transition-colors hover:bg-foreground hover:text-background"
           >
-            {EMAIL}
+            <MailIcon />
+            Request CV
           </a>
 
           <div className="mt-12 flex items-center gap-2 font-sketch text-base text-muted-foreground">
@@ -845,10 +913,19 @@ function Index() {
 
           <div className="mt-10 hairline-t pt-8 flex flex-col gap-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <p>© 2026 Okiela Henry. A multidisciplinary practice.</p>
-            <div className="flex gap-8">
-              <a href="#" className="transition-colors hover:text-foreground">Aureacove</a>
-              <a href="#" className="transition-colors hover:text-foreground">Instagram</a>
-              <a href="#" className="transition-colors hover:text-foreground">Read.cv</a>
+            <div className="flex flex-wrap gap-x-8 gap-y-2">
+              {LINKS.map((l) => (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  className="transition-colors hover:text-foreground"
+                  {...(l.href.startsWith("http")
+                    ? { target: "_blank", rel: "noreferrer" }
+                    : {})}
+                >
+                  {l.label}
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -1204,6 +1281,21 @@ function ArrowRight() {
   );
 }
 
+function MailIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <rect x="2" y="3.5" width="12" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
+      <path
+        d="M2.5 4.5 L8 8.5 L13.5 4.5"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /* Globe as the capital "O" in "Optimist" — black & white, axial-tilted, static */
 function GlobeO({ accent: _accent }: { accent: string }) {
   return (
@@ -1479,12 +1571,24 @@ function BuildingBlocks() {
 }
 
 function Dualities() {
+  const reveal = (delay: number) => ({
+    animation: "fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both",
+    animationDelay: `${delay}s`,
+  });
   return (
     <div className="max-w-sm">
       <p className="font-serif text-2xl leading-snug text-foreground/85 sm:text-3xl lg:text-4xl">
-        Two minds.
+        <span className="inline-block" style={reveal(0.1)}>Two</span>{" "}
+        <span className="inline-block" style={reveal(0.28)}>minds.</span>
         <br />
-        <span className="text-accent-tomato">One hand.</span>
+        <span className="inline-block text-accent-tomato" style={reveal(0.6)}>One</span>{" "}
+        <span
+          className="relative inline-block text-accent-tomato"
+          style={reveal(0.8)}
+        >
+          hand.
+          <SketchUnderline color="var(--accent-tomato)" />
+        </span>
       </p>
     </div>
   );
