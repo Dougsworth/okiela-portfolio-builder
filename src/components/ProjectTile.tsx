@@ -51,139 +51,189 @@ export function ProjectTile({ palette, name, category, year, children }: Props) 
 
 /* ─────────── Individual designs ─────────── */
 
-export function MaroonPoster() {
+export function DualityPoster() {
   return (
     <div className="flex h-full w-full flex-col justify-between p-7">
       <div className="flex items-start justify-between">
-        <span className="text-[10px] uppercase tracking-[0.18em] opacity-70">No. 014</span>
+        <span className="text-[10px] uppercase tracking-[0.18em] opacity-70">No. 001</span>
         <span className="text-[10px] uppercase tracking-[0.18em] opacity-70">MMXXVI</span>
       </div>
       <div className="-mx-1">
-        <h3 className="font-serif text-[44px] leading-[0.92] tracking-tight">
-          Nights in
+        <h3 className="font-serif text-[40px] leading-[0.92] tracking-tight">
+          The duality
           <br />
-          motion,
+          of an{" "}
+          <span className="relative inline-block">
+            optimist
+            <svg
+              className="absolute -bottom-1.5 left-0 w-full"
+              height="6"
+              viewBox="0 0 100 6"
+              preserveAspectRatio="none"
+              aria-hidden
+            >
+              <path
+                d="M1 3 Q22 0 44 3 T99 3"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                opacity="0.6"
+              />
+            </svg>
+          </span>
           <br />
-          <span className="opacity-70">a study.</span>
+          <span className="opacity-70">— a manifesto.</span>
         </h3>
       </div>
       <div className="hairline-t pt-3 flex items-center justify-between text-[10px] uppercase tracking-[0.18em] opacity-70">
         <span>Kingston</span>
-        <span>Poster series</span>
+        <span>Personal series</span>
       </div>
     </div>
   );
 }
 
-export function MintBottle() {
+export function AureacoveLabel() {
   return (
     <div className="flex h-full w-full items-center justify-center p-6">
-      <div className="relative h-[78%] w-[42%]">
-        {/* bottle silhouette */}
-        <div className="absolute inset-x-0 top-0 mx-auto h-[14%] w-[34%] rounded-t-md bg-current opacity-90" />
-        <div className="absolute inset-x-0 top-[12%] mx-auto h-[6%] w-[58%] bg-current opacity-90" />
-        <div className="absolute inset-x-0 top-[18%] h-[82%] rounded-b-[18px] rounded-t-[6px] bg-current opacity-90" />
+      <div className="relative h-[78%] w-[58%]">
+        {/* hangtag silhouette */}
+        <div className="absolute inset-x-0 top-0 mx-auto h-3 w-3 rounded-full border border-current opacity-80" />
+        <div className="absolute inset-x-0 top-4 mx-auto h-[12%] w-[3%] bg-current opacity-60" />
+        <div className="absolute inset-x-0 top-[16%] h-[84%] rounded-[6px] bg-current opacity-90" />
         {/* label */}
-        <div className="absolute inset-x-2 top-[36%] flex h-[44%] flex-col items-center justify-between rounded-[4px] bg-mint p-3 text-center text-mint-ink">
-          <span className="text-[8px] uppercase tracking-[0.2em] opacity-70">Slow brew</span>
-          <div className="font-serif text-[22px] leading-none">cold</div>
-          <span className="text-[8px] uppercase tracking-[0.2em] opacity-70">355 ml</span>
+        <div className="absolute inset-x-3 top-[24%] bottom-3 flex flex-col items-center justify-between rounded-[3px] bg-mint p-4 text-center text-mint-ink">
+          <span className="text-[8px] uppercase tracking-[0.24em] opacity-70">Aureacove</span>
+          <div>
+            <div className="font-serif text-[32px] leading-none">AC</div>
+            <div className="mt-2 text-[8px] uppercase tracking-[0.22em] opacity-70">Hand · Made</div>
+          </div>
+          <span className="text-[8px] uppercase tracking-[0.22em] opacity-70">est. 2023</span>
         </div>
       </div>
     </div>
   );
 }
 
-export function AmberFlyer() {
+export function CreativeSpaceFlyer() {
   return (
     <div className="flex h-full w-full flex-col justify-between p-7">
       <div>
-        <p className="text-[10px] uppercase tracking-[0.2em] opacity-70">A workshop</p>
-        <h3 className="mt-3 font-serif text-[40px] leading-[0.95]">
-          Hands,
+        <p className="text-[10px] uppercase tracking-[0.2em] opacity-70">Creative space</p>
+        <h3 className="mt-3 font-serif text-[38px] leading-[0.95]">
+          Pottery,
           <br />
-          paper &amp;
+          paint &amp;
           <br />
-          patience.
+          play.
         </h3>
       </div>
       <div className="space-y-1.5 text-[11px] leading-relaxed">
         <div className="hairline-t pt-2 flex justify-between">
-          <span className="opacity-70">Date</span>
-          <span>Sat 18 Apr</span>
+          <span className="opacity-70">Ages</span>
+          <span>3 — 12</span>
         </div>
         <div className="flex justify-between">
-          <span className="opacity-70">Time</span>
-          <span>10:00 — 16:00</span>
+          <span className="opacity-70">Forms</span>
+          <span>Clay · Oil · Bead</span>
         </div>
         <div className="flex justify-between">
-          <span className="opacity-70">Place</span>
-          <span>Hope Road 22</span>
+          <span className="opacity-70">Summer</span>
+          <span>2023</span>
         </div>
       </div>
     </div>
   );
 }
 
-export function NavyBrand() {
+export function GraphicStudio() {
   return (
     <div className="flex h-full w-full flex-col justify-between p-7">
       <div className="flex items-center gap-2">
         <div className="h-2.5 w-2.5 rounded-full bg-current opacity-90" />
-        <span className="text-[10px] uppercase tracking-[0.2em] opacity-70">Atelier mar</span>
+        <span className="text-[10px] uppercase tracking-[0.2em] opacity-70">Mark making</span>
       </div>
       <div>
-        <div className="font-serif text-[56px] leading-none">M.</div>
+        <div className="font-serif text-[56px] leading-none">OH.</div>
         <p className="mt-3 text-[11px] leading-relaxed opacity-80 max-w-[80%]">
-          A small studio building quiet brands for people who care about the small things.
+          Wordmarks and small identity systems for studios, shops and quiet brands.
         </p>
       </div>
       <div className="hairline-t pt-3 flex justify-between text-[10px] uppercase tracking-[0.2em] opacity-70">
         <span>Identity</span>
-        <span>Card 01 / 06</span>
+        <span>Set 03 / 05</span>
       </div>
     </div>
   );
 }
 
-export function PinkEditorial() {
+export function BBPasteries() {
   return (
     <div className="flex h-full w-full flex-col justify-between p-7">
-      <p className="text-[10px] uppercase tracking-[0.2em] opacity-70">Issue 07 — Spring</p>
+      <p className="text-[10px] uppercase tracking-[0.2em] opacity-70">B &amp; B Pasteries · 2018 — 2021</p>
       <div>
-        <h3 className="font-serif text-[42px] leading-[0.95]">
-          On
+        <h3 className="font-serif text-[40px] leading-[0.95]">
+          Decorating
           <br />
-          softness,
+          cakes,
           <br />
-          &amp; other
+          counting
           <br />
-          quiet things.
+          tins.
         </h3>
       </div>
       <div className="hairline-t pt-3 flex justify-between text-[10px] uppercase tracking-[0.2em] opacity-70">
-        <span>Editorial</span>
-        <span>p. 24</span>
+        <span>Family bakery</span>
+        <span>No. 52</span>
       </div>
     </div>
   );
 }
 
-export function ForestHoney() {
+export function FieldNotes() {
   return (
-    <div className="flex h-full w-full items-center justify-center p-6">
-      <div className="relative h-[72%] w-[58%] rounded-[6px] bg-current opacity-95">
-        {/* lid */}
-        <div className="absolute -top-3 left-1/2 h-5 w-[70%] -translate-x-1/2 rounded-[4px] bg-current opacity-90" />
-        {/* label */}
-        <div className="absolute inset-x-3 top-6 bottom-6 flex flex-col items-center justify-between rounded-[4px] bg-forest p-4 text-center text-forest-ink">
-          <span className="text-[9px] uppercase tracking-[0.22em] opacity-70">Wild bloom</span>
-          <div>
-            <div className="font-serif text-[26px] leading-none">honey</div>
-            <div className="mt-1 text-[9px] uppercase tracking-[0.22em] opacity-70">No. 03</div>
-          </div>
-          <span className="text-[9px] uppercase tracking-[0.22em] opacity-70">250 g · raw</span>
+    <div className="flex h-full w-full flex-col justify-between p-7">
+      <div className="flex items-start justify-between">
+        <span className="text-[10px] uppercase tracking-[0.22em] opacity-70">Field notes</span>
+        <span className="text-[10px] uppercase tracking-[0.22em] opacity-70">JA · 18°N</span>
+      </div>
+      <div className="relative mx-auto h-[58%] w-[78%]">
+        {/* botanical specimen card */}
+        <div className="absolute inset-0 rounded-[4px] border border-current opacity-60" />
+        <div className="absolute inset-3 flex flex-col justify-between">
+          {/* stem + leaves */}
+          <svg viewBox="0 0 100 80" className="h-full w-full" aria-hidden>
+            <path
+              d="M50 78 C50 60 50 40 50 18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              opacity="0.8"
+            />
+            <path
+              d="M50 56 C40 52 32 50 22 52 C30 56 40 58 50 56"
+              fill="currentColor"
+              opacity="0.55"
+            />
+            <path
+              d="M50 42 C60 38 68 36 78 38 C70 42 60 44 50 42"
+              fill="currentColor"
+              opacity="0.55"
+            />
+            <path
+              d="M50 28 C42 24 36 22 28 24 C36 28 42 30 50 28"
+              fill="currentColor"
+              opacity="0.55"
+            />
+            <circle cx="50" cy="14" r="6" fill="currentColor" opacity="0.7" />
+          </svg>
         </div>
+      </div>
+      <div className="hairline-t pt-3 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] opacity-70">
+        <span>Botanic</span>
+        <span>No. 09</span>
       </div>
     </div>
   );

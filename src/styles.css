@@ -64,28 +64,28 @@
   --accent-tomato: oklch(0.62 0.2 25);
   --accent-sky: oklch(0.78 0.1 220);
 
-  --card: oklch(1 0 0);
+  --card: oklch(0.992 0.012 85);
   --card-foreground: oklch(0.18 0.01 60);
-  --popover: oklch(1 0 0);
+  --popover: oklch(0.992 0.012 85);
   --popover-foreground: oklch(0.18 0.01 60);
 
   --primary: oklch(0.18 0.01 60);
   --primary-foreground: oklch(0.985 0.002 80);
 
-  --secondary: oklch(0.955 0.008 80);
+  --secondary: oklch(0.95 0.014 80);
   --secondary-foreground: oklch(0.18 0.01 60);
 
-  --muted: oklch(0.955 0.008 80);
-  --muted-foreground: oklch(0.48 0.012 70);
+  --muted: oklch(0.95 0.014 80);
+  --muted-foreground: oklch(0.46 0.014 70);
 
-  --accent: oklch(0.955 0.008 80);
+  --accent: oklch(0.95 0.014 80);
   --accent-foreground: oklch(0.18 0.01 60);
 
   --destructive: oklch(0.55 0.22 27);
   --destructive-foreground: oklch(0.985 0.002 80);
 
-  --border: oklch(0.88 0.008 70);
-  --input: oklch(0.88 0.008 70);
+  --border: oklch(0.86 0.012 70);
+  --input: oklch(0.86 0.012 70);
   --ring: oklch(0.18 0.01 60);
 
   /* Project palette — restrained, mature */
@@ -198,4 +198,14 @@
 @keyframes block-draw {
   0% { stroke-dashoffset: var(--len, 400); }
   100% { stroke-dashoffset: 0; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes globe-spin {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
 }
