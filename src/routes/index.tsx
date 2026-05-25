@@ -25,7 +25,7 @@ const MAILTO = `mailto:${EMAIL}?subject=Inquiry%20%E2%80%94%20Okiela`;
 // Edit these in one place. Leave a field as "" and its link is hidden.
 const PROFILE = {
   name: "Okiela Henry",
-  title: "Designer · Photographer · Jeweller",
+  title: "Creative Director · Designer · Multidisciplinary Creative",
   location: "Kingston, Jamaica",
   email: EMAIL,
   phone: "876-507-9093",
@@ -426,6 +426,17 @@ function Index() {
         />
         <div className="pointer-events-none absolute left-[42%] top-24 hidden h-2 w-2 rounded-full bg-forest lg:block" />
 
+        {/* mobile/tablet accent glow — tracks the selected palette swatch */}
+        <div
+          className="pointer-events-none absolute -top-20 right-[-25%] h-[380px] w-[380px] rounded-full opacity-40 blur-3xl transition-colors duration-500 lg:hidden"
+          style={{ background: `radial-gradient(circle, ${accent}, transparent 70%)` }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute bottom-10 left-[-20%] h-[300px] w-[300px] rounded-full bg-forest/15 blur-3xl lg:hidden"
+          aria-hidden
+        />
+
         <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-12 sm:px-6 sm:pb-24 sm:pt-16 lg:px-10 lg:pb-28 lg:pt-20">
           {/* sania-style top row: small wordmark + meta */}
           <div className="flex items-center justify-between gap-3">
@@ -435,7 +446,7 @@ function Index() {
                 style={{ backgroundColor: accent }}
               />
               <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:text-[11px]">
-                Okiela Henry · Designer · Photographer · Jeweller · Kingston, JA
+                Okiela Henry · Creative Director · Designer · Multidisciplinary Creative · Kingston, JA
               </p>
             </div>
             <Compass />
@@ -476,26 +487,28 @@ function Index() {
                   </span>
                 ))}
               </div>
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <a
                   href={MAILTO}
-                  className="hairline rounded-[10px] bg-foreground px-5 py-3 text-sm text-background transition-opacity hover:opacity-85"
+                  className="hairline flex items-center justify-center rounded-[12px] bg-foreground px-5 py-3.5 text-sm font-medium text-background shadow-sm transition-opacity hover:opacity-85 sm:rounded-[10px] sm:py-3"
                 >
                   Get in touch
                 </a>
-                <a
-                  href={CV_MAILTO}
-                  className="hairline inline-flex items-center gap-2 rounded-[10px] px-5 py-3 text-sm transition-colors hover:bg-foreground hover:text-background"
-                >
-                  <MailIcon />
-                  Request CV
-                </a>
-                <a
-                  href="#work"
-                  className="hairline rounded-[10px] px-5 py-3 text-sm transition-colors hover:bg-foreground hover:text-background"
-                >
-                  View work
-                </a>
+                <div className="grid grid-cols-2 gap-3 sm:flex sm:gap-3">
+                  <a
+                    href={CV_MAILTO}
+                    className="hairline inline-flex items-center justify-center gap-2 rounded-[12px] px-5 py-3.5 text-sm transition-colors hover:bg-foreground hover:text-background sm:rounded-[10px] sm:py-3"
+                  >
+                    <MailIcon />
+                    Request CV
+                  </a>
+                  <a
+                    href="#work"
+                    className="hairline inline-flex items-center justify-center rounded-[12px] px-5 py-3.5 text-sm transition-colors hover:bg-foreground hover:text-background sm:rounded-[10px] sm:py-3"
+                  >
+                    View work
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -589,7 +602,7 @@ function Index() {
           </div>
         </div>
 
-        <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
+        <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-28">
           <div className="flex items-center gap-2.5">
             <span className="h-1.5 w-1.5 rounded-full bg-accent-tomato" />
             <p className="font-sketch text-2xl text-foreground lg:text-3xl">about</p>
@@ -660,7 +673,7 @@ function Index() {
 
       {/* ───── Services — hireable, named, scannable ───── */}
       <section id="services" className="hairline-b">
-        <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-28">
           <div className="mb-6 flex items-baseline justify-between gap-3">
             <p className="flex items-center gap-3 font-sketch text-2xl text-foreground lg:text-3xl">
               <SketchSparkle color="var(--accent-sun)" />
@@ -725,7 +738,7 @@ function Index() {
 
       {/* ───── Photography ───── */}
       <section id="photography" className="hairline-b">
-        <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-28">
           <div className="mb-6 flex items-baseline justify-between gap-3">
             <p className="flex items-center gap-3 font-sketch text-2xl text-foreground lg:text-3xl">
               <SketchCamera color="var(--navy)" />
@@ -758,9 +771,9 @@ function Index() {
                     No. {String(i + 1).padStart(2, "0")}
                   </span>
                 </button>
-                <figcaption className="mt-3 flex items-baseline justify-between text-sm">
-                  <span className="text-foreground">{p.caption}</span>
-                  <span className="text-muted-foreground">JA</span>
+                <figcaption className="mt-3 flex items-baseline justify-between gap-2 text-sm">
+                  <span className="min-w-0 truncate text-foreground">{p.caption}</span>
+                  <span className="shrink-0 text-muted-foreground">JA</span>
                 </figcaption>
               </figure>
             ))}
@@ -770,7 +783,7 @@ function Index() {
 
       {/* ───── Selected work ───── */}
       <section id="work" className="hairline-b">
-        <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-28">
           <div className="mb-14 flex items-baseline justify-between gap-3">
             <p className="flex items-center gap-3 font-sketch text-2xl text-foreground lg:text-3xl">
               <SketchFlower color="var(--accent-tomato)" />
@@ -798,7 +811,7 @@ function Index() {
 
       {/* ───── Experience ───── */}
       <section id="experience" className="hairline-b">
-        <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-28">
           <div className="mb-14 flex items-baseline justify-between gap-3">
             <p className="flex items-center gap-3 font-sketch text-2xl text-foreground lg:text-3xl">
               <SketchPencil color="var(--maroon)" />
@@ -851,7 +864,7 @@ function Index() {
 
       {/* ───── Footer — sania-style "let's work together" ───── */}
       <footer id="contact" className="bg-card">
-        <div className="mx-auto max-w-6xl px-6 py-24 lg:px-10 lg:py-32">
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-6 sm:py-24 lg:px-10 lg:py-32">
           <p className="font-sketch text-2xl text-muted-foreground lg:text-3xl">
             let's work together
           </p>
@@ -1215,13 +1228,13 @@ function Lightbox({
       {/* main photo */}
       <div
         onClick={stop}
-        className="flex max-h-[70vh] w-full max-w-5xl items-center justify-center"
+        className="flex max-h-[58vh] w-full max-w-5xl items-center justify-center sm:max-h-[72vh]"
       >
         <img
           key={photo.src}
           src={photo.src}
           alt={photo.caption}
-          className="max-h-[70vh] w-auto max-w-full rounded-[10px] object-contain shadow-2xl"
+          className="max-h-[58vh] w-auto max-w-full rounded-[10px] object-contain shadow-2xl sm:max-h-[72vh]"
           style={{ animation: "lightbox-zoom 320ms cubic-bezier(0.2,0.7,0.2,1)" }}
         />
       </div>
@@ -1229,7 +1242,7 @@ function Lightbox({
       {/* caption + counter */}
       <div
         onClick={stop}
-        className="mt-6 flex flex-col items-center gap-1 text-background sm:flex-row sm:gap-4"
+        className="mt-4 flex flex-col items-center gap-1 text-background sm:mt-6 sm:flex-row sm:gap-4"
       >
         <span className="font-serif text-xl sm:text-2xl">{photo.caption}</span>
         <span className="text-xs uppercase tracking-[0.22em] opacity-70 tabular-nums">
@@ -1240,7 +1253,7 @@ function Lightbox({
       {/* thumbnail strip */}
       <div
         onClick={stop}
-        className="mt-6 flex max-w-full gap-2 overflow-x-auto px-2 pb-2"
+        className="mt-4 flex max-w-full gap-2 overflow-x-auto px-2 pb-2 sm:mt-6"
       >
         {photographs.map((p, i) => (
           <button
