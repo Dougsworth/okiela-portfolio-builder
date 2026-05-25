@@ -181,10 +181,10 @@ const projects: Project[] = [
     cta: "Run a workshop with me →",
     Tile: CreativeSpaceFlyer,
     images: [
-      U("1503676260728-1c00da094a0b"),
-      U("1607453998774-d533f65dac99"),
-      U("1513475382585-d06e58bcb0e0"),
-      U("1576765608535-5f04d1e3f289"),
+      "/photos/cs-2.jpeg",
+      "/photos/cs-3.jpeg",
+      "/photos/cs-1.jpeg",
+      "/photos/cs-4.jpeg",
     ],
   },
   {
@@ -231,10 +231,9 @@ const projects: Project[] = [
     cta: "Decorate a small order →",
     Tile: BBPasteries,
     images: [
-      U("1486427944299-d1955d23e34d"),
-      U("1495147466023-ac5c588e2e94"),
-      U("1565958011703-44f9829ba187"),
-      U("1551024506-0bccd828d307"),
+      "/photos/bb-1.jpeg",
+      "/photos/bb-2.jpeg",
+      "/photos/bb-3.jpeg",
     ],
   },
   {
@@ -1605,23 +1604,39 @@ function HeroProof() {
         className="font-serif text-2xl leading-snug text-foreground/85 sm:text-3xl lg:text-4xl"
         style={reveal(0.1)}
       >
-        &ldquo;Considered work,
+        Craft with a
         <br />
         <span className="relative inline-block text-accent-tomato">
-          made by hand.
+          commercial edge.
           <SketchUnderline color="var(--accent-tomato)" />
         </span>
-        &rdquo;
       </p>
 
-      {/* social proof — real client names, pulled from the work */}
+      {/* social proof — real client logos (branding for fashion labels) */}
       <div className="mt-7" style={reveal(0.4)}>
         <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
           Trusted by
         </p>
-        <p className="mt-2 max-w-sm font-serif text-lg leading-snug text-foreground sm:text-xl">
-          Aurea Cove · Herblunts · Ethereal Motif · Eternal Fair Angel
-        </p>
+        <div className="mt-3 flex flex-wrap items-center gap-x-7 gap-y-4">
+          <img
+            src="/clients/xodus.png"
+            alt="Xodus"
+            className="h-11 w-auto object-contain sm:h-12"
+            loading="lazy"
+          />
+          <img
+            src="/clients/fyp.png"
+            alt="#FYP"
+            className="h-10 w-auto object-contain sm:h-11"
+            loading="lazy"
+          />
+          <img
+            src="/clients/grennells.png"
+            alt="Grennell's Driving School"
+            className="h-10 w-auto object-contain sm:h-11"
+            loading="lazy"
+          />
+        </div>
       </div>
 
       {/* availability — the thing a hiring manager is scanning for */}
