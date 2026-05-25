@@ -75,7 +75,11 @@ type Project = {
   tools: string[];
   cta: string;
   Tile: ComponentType;
+  images?: string[];
 };
+
+const U = (id: string, w = 900, q = 70) =>
+  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=${q}`;
 
 const projects: Project[] = [
   {
@@ -96,6 +100,12 @@ const projects: Project[] = [
     tools: ["InDesign", "Photoshop", "Hand-lettering"],
     cta: "Commission a personal series →",
     Tile: DualityPoster,
+    images: [
+      U("1517077304055-6e89abbf09b0"),
+      U("1499750310107-5fef28a66643"),
+      U("1455390582262-044cdead277a"),
+      U("1483546363825-7ebf25fb7513"),
+    ],
   },
   {
     no: "002",
@@ -115,6 +125,12 @@ const projects: Project[] = [
     tools: ["Hand fabrication", "Beadwork", "Wire", "Macrame"],
     cta: "Order a custom piece →",
     Tile: AureacoveLabel,
+    images: [
+      U("1599643477877-530eb83abc8e"),
+      U("1611652022419-a9419f74343d"),
+      U("1605100804763-247f67b3557e"),
+      U("1543294001-f7cd5d7fb516"),
+    ],
   },
   {
     no: "003",
@@ -134,6 +150,12 @@ const projects: Project[] = [
     tools: ["Clay", "Oil & watercolour", "Beads", "Patience"],
     cta: "Run a workshop with me →",
     Tile: CreativeSpaceFlyer,
+    images: [
+      U("1503676260728-1c00da094a0b"),
+      U("1607453998774-d533f65dac99"),
+      U("1513475382585-d06e58bcb0e0"),
+      U("1576765608535-5f04d1e3f289"),
+    ],
   },
   {
     no: "004",
@@ -153,6 +175,12 @@ const projects: Project[] = [
     tools: ["Canva", "Adobe Express", "Hand-lettering"],
     cta: "Commission an identity →",
     Tile: GraphicStudio,
+    images: [
+      U("1561070791-2526d30994b8"),
+      U("1454165804606-c3d57bc86b40"),
+      U("1517677129300-07b130802f46"),
+      U("1559136555-9303baea8ebd"),
+    ],
   },
   {
     no: "005",
@@ -172,6 +200,12 @@ const projects: Project[] = [
     tools: ["Piping bags", "Royal icing", "Brown paper & string"],
     cta: "Decorate a small order →",
     Tile: BBPasteries,
+    images: [
+      U("1486427944299-d1955d23e34d"),
+      U("1495147466023-ac5c588e2e94"),
+      U("1565958011703-44f9829ba187"),
+      U("1551024506-0bccd828d307"),
+    ],
   },
   {
     no: "006",
@@ -191,6 +225,12 @@ const projects: Project[] = [
     tools: ["iPhone", "Natural light", "Slow looking"],
     cta: "Commission a shoot →",
     Tile: FieldNotes,
+    images: [
+      "/photos/photo-2.jpeg",
+      "/photos/photo-4.jpeg",
+      "/photos/photo-5.jpeg",
+      "/photos/photo-6.jpeg",
+    ],
   },
 ];
 
@@ -930,6 +970,41 @@ function ProjectModal({
                 ))}
               </div>
             </div>
+
+            {/* Gallery */}
+            {project.images && project.images.length > 0 && (
+              <div className="mt-16">
+                <div className="flex items-baseline justify-between">
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                    Selected imagery
+                  </p>
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground tabular-nums">
+                    {String(project.images.length).padStart(2, "0")} images
+                  </p>
+                </div>
+                <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:gap-4">
+                  {project.images.map((src, i) => (
+                    <figure
+                      key={src}
+                      className={`hairline group relative aspect-[3/4] overflow-hidden rounded-[10px] ${tilePaletteBg[project.palette]}`}
+                    >
+                      <img
+                        src={src}
+                        alt={`${project.name} reference ${i + 1}`}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                        onError={(e) => {
+                          e.currentTarget.style.opacity = "0";
+                        }}
+                      />
+                      <span className="absolute bottom-2 left-2 rounded-full bg-background/80 px-2 py-0.5 text-[9px] uppercase tracking-[0.22em] text-foreground/70 tabular-nums backdrop-blur-sm">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </figure>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* CTA */}
             <div className="hairline-t mt-16 grid grid-cols-1 gap-6 pt-10 sm:grid-cols-12 sm:items-end">
