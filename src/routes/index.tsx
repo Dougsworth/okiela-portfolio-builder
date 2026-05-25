@@ -61,14 +61,6 @@ const availableFor = [
   "Aureacove commissions",
 ];
 
-const okielaLetters: { c: string; start: number; tilt: number }[] = [
-  { c: "o", start: 240, tilt: -18 },
-  { c: "k", start: 280, tilt: 22 },
-  { c: "i", start: 220, tilt: -30 },
-  { c: "e", start: 300, tilt: 26 },
-  { c: "l", start: 250, tilt: -12 },
-  { c: "a", start: 270, tilt: 20 },
-];
 
 type Project = {
   no: string;
@@ -327,12 +319,6 @@ function Index() {
     };
   }, [lightboxIdx]);
 
-  const [dropCycle, setDropCycle] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setDropCycle((c) => c + 1), 4 * 60 * 1000);
-    return () => clearInterval(id);
-  }, []);
-
   const [projectIdx, setProjectIdx] = useState<number | null>(null);
   const closeProject = () => setProjectIdx(null);
   const nextProject = () =>
@@ -420,57 +406,19 @@ function Index() {
           </div>
 
           {/* main display: "The Duality Of An Optimist" — directly from PDF cover */}
-          <div className="relative mt-10">
-            <h1 className="relative z-10 max-w-5xl font-serif text-[11vw] leading-[0.95] tracking-tight sm:text-[64px] md:text-[76px] lg:text-[96px]">
-              The duality of an<span className="whitespace-nowrap"><GlobeO accent={accent} />ptimist</span><span style={{ color: accent }}>.</span>
-            </h1>
-            {/* cloud — sits under the duality line */}
-            <DropCloud />
-          </div>
+          <h1 className="mt-10 max-w-5xl font-serif text-[11vw] leading-[0.95] tracking-tight sm:text-[64px] md:text-[76px] lg:text-[96px]">
+            The duality of an<span className="whitespace-nowrap"><GlobeO accent={accent} />ptimist</span><span style={{ color: accent }}>.</span>
+          </h1>
 
           {/* two-column intro — okiela. sketch wordmark + right column copy */}
           <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
             <div className="lg:col-span-7">
-              <div className="relative">
-                <h2
-                  className="relative font-sketch text-[22vw] leading-[0.85] sm:text-[140px] lg:text-[180px]"
-                  style={{ perspective: "1400px", transformStyle: "preserve-3d" }}
-                >
-                  {okielaLetters.map((L, i) => (
-                    <span
-                      key={`${dropCycle}-${i}`}
-                      className="inline-block will-change-transform"
-                      style={{
-                        animation: "letter-drop 2.1s cubic-bezier(0.4, 0, 0.2, 1) both",
-                        animationDelay: `${i * 0.08}s`,
-                        transformOrigin: "50% 60%",
-                        transformStyle: "preserve-3d",
-                        backfaceVisibility: "hidden",
-                        ["--start" as string]: `-${L.start}px`,
-                        ["--tilt-start" as string]: `${L.tilt}deg`,
-                      }}
-                    >
-                      {L.c}
-                    </span>
-                  ))}
-                  <span
-                    key={`${dropCycle}-dot`}
-                    className="inline-block transition-colors duration-300 will-change-transform"
-                    style={{
-                      color: accent,
-                      animation: "letter-drop 2.1s cubic-bezier(0.4, 0, 0.2, 1) both",
-                      animationDelay: "0.56s",
-                      transformOrigin: "50% 60%",
-                      transformStyle: "preserve-3d",
-                      backfaceVisibility: "hidden",
-                      ["--start" as string]: "-360px",
-                      ["--tilt-start" as string]: "180deg",
-                    }}
-                  >
-                    .
-                  </span>
-                </h2>
-              </div>
+              <h2 className="font-serif text-[20vw] leading-[0.9] tracking-tight sm:text-[120px] lg:text-[160px]">
+                okiela
+                <span className="transition-colors duration-300" style={{ color: accent }}>
+                  .
+                </span>
+              </h2>
             </div>
             <div className="lg:col-span-5 lg:pb-4">
               <p className="max-w-md font-serif text-xl leading-snug text-foreground sm:text-2xl">
@@ -1526,45 +1474,6 @@ function BuildingBlocks() {
         />
       </svg>
     </>
-  );
-}
-
-function DropCloud() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute -bottom-12 left-0 z-0 h-36 w-full max-w-5xl sm:-bottom-16 sm:h-44 lg:-bottom-20 lg:h-52"
-      style={{
-        animation: "cloud-drift 18s ease-in-out infinite",
-      }}
-    >
-      <svg
-        viewBox="0 0 1200 240"
-        preserveAspectRatio="xMinYMid meet"
-        className="h-full w-full"
-      >
-        {/* transparent cloud — outline only, single puffy silhouette */}
-        <path
-          d="M 30 154
-             C -10 148, 0 100, 50 88
-             C 70 42, 150 28, 210 62
-             C 250 14, 370 10, 410 52
-             C 460 -8, 610 -10, 660 50
-             C 710 6, 820 12, 860 60
-             C 905 30, 985 36, 1020 80
-             C 1055 112, 1085 134, 1060 154
-             C 1010 174, 800 178, 600 178
-             C 400 178, 200 174, 30 154
-             Z"
-          fill="none"
-          stroke="var(--muted-foreground)"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          opacity="0.55"
-        />
-      </svg>
-    </div>
   );
 }
 
