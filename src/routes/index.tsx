@@ -1533,7 +1533,7 @@ function DropCloud() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute -bottom-20 left-0 right-0 z-0 h-44 sm:-bottom-28 sm:h-56 lg:-bottom-36 lg:h-64"
+      className="pointer-events-none absolute -bottom-16 left-0 z-0 h-36 w-full max-w-5xl sm:-bottom-20 sm:h-44 lg:-bottom-24 lg:h-52"
       style={{
         animation: "cloud-drift 18s ease-in-out infinite",
         filter: "blur(1px)",
@@ -1546,19 +1546,19 @@ function DropCloud() {
       >
         <defs>
           <radialGradient id="cloud-body" cx="50%" cy="40%" r="65%">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
-            <stop offset="55%" stopColor="#ffffff" stopOpacity="0.7" />
+            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.7" />
+            <stop offset="55%" stopColor="#ffffff" stopOpacity="0.45" />
             <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
           </radialGradient>
           <radialGradient id="cloud-shade" cx="50%" cy="70%" r="55%">
-            <stop offset="0%" stopColor="#a8b0bf" stopOpacity="0.35" />
+            <stop offset="0%" stopColor="#a8b0bf" stopOpacity="0.2" />
             <stop offset="100%" stopColor="#a8b0bf" stopOpacity="0" />
           </radialGradient>
           <filter id="cloud-blur" x="-10%" y="-10%" width="120%" height="120%">
             <feGaussianBlur stdDeviation="10" />
           </filter>
         </defs>
-        {/* soft cool-grey underbelly so the cloud reads against cream */}
+        {/* soft cool-grey underbelly */}
         <g filter="url(#cloud-blur)">
           <ellipse cx="380" cy="130" rx="170" ry="70" fill="url(#cloud-shade)" />
           <ellipse cx="600" cy="138" rx="200" ry="80" fill="url(#cloud-shade)" />
@@ -1574,8 +1574,8 @@ function DropCloud() {
           <ellipse cx="1080" cy="146" rx="110" ry="44" />
           <ellipse cx="600" cy="156" rx="420" ry="36" />
         </g>
-        {/* bright highlights along the top edge */}
-        <g fill="#ffffff" opacity="0.85">
+        {/* soft highlights along the top edge */}
+        <g fill="#ffffff" opacity="0.55">
           <ellipse cx="350" cy="74" rx="70" ry="14" />
           <ellipse cx="560" cy="66" rx="90" ry="14" />
           <ellipse cx="770" cy="76" rx="80" ry="14" />
