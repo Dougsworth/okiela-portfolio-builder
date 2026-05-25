@@ -1541,7 +1541,7 @@ function DropCloud() {
     >
       <svg
         viewBox="0 0 1200 240"
-        preserveAspectRatio="xMidYMid meet"
+        preserveAspectRatio="xMinYMid meet"
         className="h-full w-full"
       >
         <defs>
@@ -1560,26 +1560,44 @@ function DropCloud() {
         </defs>
         {/* soft cool-grey underbelly */}
         <g filter="url(#cloud-blur)">
-          <ellipse cx="380" cy="130" rx="170" ry="70" fill="url(#cloud-shade)" />
-          <ellipse cx="600" cy="138" rx="200" ry="80" fill="url(#cloud-shade)" />
-          <ellipse cx="820" cy="132" rx="180" ry="72" fill="url(#cloud-shade)" />
+          <ellipse cx="240" cy="130" rx="170" ry="70" fill="url(#cloud-shade)" />
+          <ellipse cx="460" cy="138" rx="200" ry="80" fill="url(#cloud-shade)" />
+          <ellipse cx="680" cy="132" rx="180" ry="72" fill="url(#cloud-shade)" />
         </g>
-        {/* cloud body — soft white puffs */}
+        {/* cloud body — soft white puffs (shifted left) */}
         <g fill="url(#cloud-body)">
-          <ellipse cx="200" cy="138" rx="120" ry="50" />
-          <ellipse cx="380" cy="100" rx="160" ry="68" />
-          <ellipse cx="580" cy="92" rx="170" ry="72" />
-          <ellipse cx="780" cy="100" rx="170" ry="68" />
-          <ellipse cx="960" cy="120" rx="150" ry="60" />
-          <ellipse cx="1080" cy="146" rx="110" ry="44" />
-          <ellipse cx="600" cy="156" rx="420" ry="36" />
+          <ellipse cx="60" cy="138" rx="120" ry="50" />
+          <ellipse cx="240" cy="100" rx="160" ry="68" />
+          <ellipse cx="440" cy="92" rx="170" ry="72" />
+          <ellipse cx="640" cy="100" rx="170" ry="68" />
+          <ellipse cx="820" cy="120" rx="150" ry="60" />
+          <ellipse cx="940" cy="146" rx="110" ry="44" />
+          <ellipse cx="460" cy="156" rx="420" ry="36" />
+        </g>
+        {/* sketch shading — soft outline contour lines along the puffs */}
+        <g fill="none" stroke="#8e95a6" strokeWidth="0.7" opacity="0.45" strokeLinecap="round">
+          <path d="M30 156 Q140 90 280 78 Q420 64 540 76 Q680 90 820 90 Q920 92 980 110" />
+          <path d="M120 168 Q230 132 360 124 Q500 116 620 128 Q740 138 860 138" opacity="0.7" />
+          <path d="M180 178 Q300 162 440 158 Q580 158 720 160 Q820 162 880 170" opacity="0.55" />
+        </g>
+        {/* hand-drawn shading hatches below */}
+        <g stroke="#8e95a6" strokeWidth="0.6" opacity="0.28" strokeLinecap="round">
+          <line x1="220" y1="172" x2="260" y2="186" />
+          <line x1="280" y1="170" x2="320" y2="186" />
+          <line x1="340" y1="170" x2="380" y2="186" />
+          <line x1="400" y1="170" x2="440" y2="186" />
+          <line x1="460" y1="172" x2="500" y2="188" />
+          <line x1="520" y1="172" x2="560" y2="188" />
+          <line x1="580" y1="172" x2="620" y2="188" />
+          <line x1="640" y1="174" x2="680" y2="190" />
+          <line x1="700" y1="172" x2="740" y2="188" />
         </g>
         {/* soft highlights along the top edge */}
         <g fill="#ffffff" opacity="0.55">
-          <ellipse cx="350" cy="74" rx="70" ry="14" />
-          <ellipse cx="560" cy="66" rx="90" ry="14" />
-          <ellipse cx="770" cy="76" rx="80" ry="14" />
-          <ellipse cx="940" cy="94" rx="56" ry="12" />
+          <ellipse cx="220" cy="74" rx="70" ry="14" />
+          <ellipse cx="430" cy="66" rx="90" ry="14" />
+          <ellipse cx="640" cy="76" rx="80" ry="14" />
+          <ellipse cx="810" cy="94" rx="56" ry="12" />
         </g>
       </svg>
     </div>
