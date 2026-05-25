@@ -62,12 +62,12 @@ const availableFor = [
 ];
 
 const okielaLetters: { c: string; start: number; tilt: number }[] = [
-  { c: "o", start: 520, tilt: -22 },
-  { c: "k", start: 600, tilt: 28 },
-  { c: "i", start: 480, tilt: -38 },
-  { c: "e", start: 660, tilt: 34 },
-  { c: "l", start: 540, tilt: -14 },
-  { c: "a", start: 580, tilt: 26 },
+  { c: "o", start: 240, tilt: -18 },
+  { c: "k", start: 280, tilt: 22 },
+  { c: "i", start: 220, tilt: -30 },
+  { c: "e", start: 300, tilt: 26 },
+  { c: "l", start: 250, tilt: -12 },
+  { c: "a", start: 270, tilt: 20 },
 ];
 
 type Project = {
@@ -430,7 +430,7 @@ function Index() {
                     key={i}
                     className="inline-block will-change-transform"
                     style={{
-                      animation: "letter-drop 12s cubic-bezier(0.4, 0, 0.2, 1) infinite",
+                      animation: "letter-drop 7s cubic-bezier(0.4, 0, 0.2, 1) infinite",
                       animationDelay: `${i * 0.09}s`,
                       transformOrigin: "50% 60%",
                       transformStyle: "preserve-3d",
@@ -446,13 +446,13 @@ function Index() {
                   className="inline-block transition-colors duration-300 will-change-transform"
                   style={{
                     color: accent,
-                    animation: "letter-drop 12s cubic-bezier(0.4, 0, 0.2, 1) infinite",
+                    animation: "letter-drop 7s cubic-bezier(0.4, 0, 0.2, 1) infinite",
                     animationDelay: "0.6s",
                     transformOrigin: "50% 60%",
                     transformStyle: "preserve-3d",
                     backfaceVisibility: "hidden",
-                    ["--start" as string]: "-720px",
-                    ["--tilt-start" as string]: "210deg",
+                    ["--start" as string]: "-360px",
+                    ["--tilt-start" as string]: "180deg",
                   }}
                 >
                   .
