@@ -327,6 +327,12 @@ function Index() {
     };
   }, [lightboxIdx]);
 
+  const [dropCycle, setDropCycle] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setDropCycle((c) => c + 1), 4 * 60 * 1000);
+    return () => clearInterval(id);
+  }, []);
+
   const [projectIdx, setProjectIdx] = useState<number | null>(null);
   const closeProject = () => setProjectIdx(null);
   const nextProject = () =>
@@ -421,43 +427,48 @@ function Index() {
           {/* two-column intro — okiela. sketch wordmark + right column copy */}
           <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
             <div className="lg:col-span-7">
-              <h2
-                className="font-sketch text-[22vw] leading-[0.85] sm:text-[140px] lg:text-[180px]"
-                style={{ perspective: "1400px", transformStyle: "preserve-3d" }}
-              >
-                {okielaLetters.map((L, i) => (
+              <div className="relative">
+                {/* soft cloud beneath the headline — letters appear to fall from it */}
+                <DropCloud />
+                <h2
+                  className="relative font-sketch text-[22vw] leading-[0.85] sm:text-[140px] lg:text-[180px]"
+                  style={{ perspective: "1400px", transformStyle: "preserve-3d" }}
+                >
+                  {okielaLetters.map((L, i) => (
+                    <span
+                      key={`${dropCycle}-${i}`}
+                      className="inline-block will-change-transform"
+                      style={{
+                        animation: "letter-drop 2.1s cubic-bezier(0.4, 0, 0.2, 1) both",
+                        animationDelay: `${i * 0.08}s`,
+                        transformOrigin: "50% 60%",
+                        transformStyle: "preserve-3d",
+                        backfaceVisibility: "hidden",
+                        ["--start" as string]: `-${L.start}px`,
+                        ["--tilt-start" as string]: `${L.tilt}deg`,
+                      }}
+                    >
+                      {L.c}
+                    </span>
+                  ))}
                   <span
-                    key={i}
-                    className="inline-block will-change-transform"
+                    key={`${dropCycle}-dot`}
+                    className="inline-block transition-colors duration-300 will-change-transform"
                     style={{
-                      animation: "letter-drop 7s cubic-bezier(0.4, 0, 0.2, 1) infinite",
-                      animationDelay: `${i * 0.09}s`,
+                      color: accent,
+                      animation: "letter-drop 2.1s cubic-bezier(0.4, 0, 0.2, 1) both",
+                      animationDelay: "0.56s",
                       transformOrigin: "50% 60%",
                       transformStyle: "preserve-3d",
                       backfaceVisibility: "hidden",
-                      ["--start" as string]: `-${L.start}px`,
-                      ["--tilt-start" as string]: `${L.tilt}deg`,
+                      ["--start" as string]: "-360px",
+                      ["--tilt-start" as string]: "180deg",
                     }}
                   >
-                    {L.c}
+                    .
                   </span>
-                ))}
-                <span
-                  className="inline-block transition-colors duration-300 will-change-transform"
-                  style={{
-                    color: accent,
-                    animation: "letter-drop 7s cubic-bezier(0.4, 0, 0.2, 1) infinite",
-                    animationDelay: "0.6s",
-                    transformOrigin: "50% 60%",
-                    transformStyle: "preserve-3d",
-                    backfaceVisibility: "hidden",
-                    ["--start" as string]: "-360px",
-                    ["--tilt-start" as string]: "180deg",
-                  }}
-                >
-                  .
-                </span>
-              </h2>
+                </h2>
+              </div>
             </div>
             <div className="lg:col-span-5 lg:pb-4">
               <p className="max-w-md font-serif text-xl leading-snug text-foreground sm:text-2xl">
@@ -1513,6 +1524,55 @@ function BuildingBlocks() {
         />
       </svg>
     </>
+  );
+}
+
+function DropCloud() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute -top-6 left-2 right-2 z-0 h-24 opacity-90 sm:-top-8 sm:h-32 lg:-top-10 lg:h-40"
+      style={{ animation: "cloud-drift 14s ease-in-out infinite" }}
+    >
+      <svg
+        viewBox="0 0 600 140"
+        preserveAspectRatio="none"
+        className="h-full w-full"
+      >
+        <defs>
+          <radialGradient id="cloud-fill" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stopColor="var(--background)" stopOpacity="1" />
+            <stop offset="60%" stopColor="var(--background)" stopOpacity="0.85" />
+            <stop offset="100%" stopColor="var(--background)" stopOpacity="0" />
+          </radialGradient>
+          <filter id="cloud-blur" x="-10%" y="-10%" width="120%" height="120%">
+            <feGaussianBlur stdDeviation="6" />
+          </filter>
+        </defs>
+        {/* soft shadow halo */}
+        <g filter="url(#cloud-blur)" opacity="0.35">
+          <ellipse cx="120" cy="80" rx="80" ry="38" fill="var(--muted-foreground)" />
+          <ellipse cx="220" cy="60" rx="110" ry="48" fill="var(--muted-foreground)" />
+          <ellipse cx="340" cy="64" rx="95" ry="42" fill="var(--muted-foreground)" />
+          <ellipse cx="460" cy="78" rx="90" ry="40" fill="var(--muted-foreground)" />
+        </g>
+        {/* cloud body */}
+        <g fill="url(#cloud-fill)">
+          <ellipse cx="110" cy="76" rx="70" ry="30" />
+          <ellipse cx="200" cy="56" rx="92" ry="40" />
+          <ellipse cx="310" cy="58" rx="86" ry="36" />
+          <ellipse cx="420" cy="68" rx="92" ry="38" />
+          <ellipse cx="500" cy="80" rx="68" ry="28" />
+          <ellipse cx="260" cy="82" rx="180" ry="22" />
+        </g>
+        {/* highlights */}
+        <g fill="var(--background)" opacity="0.85">
+          <ellipse cx="180" cy="44" rx="40" ry="14" />
+          <ellipse cx="320" cy="46" rx="48" ry="14" />
+          <ellipse cx="430" cy="56" rx="36" ry="12" />
+        </g>
+      </svg>
+    </div>
   );
 }
 
