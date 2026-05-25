@@ -424,7 +424,7 @@ function Index() {
             <h1 className="relative z-10 max-w-5xl font-serif text-[11vw] leading-[0.95] tracking-tight sm:text-[64px] md:text-[76px] lg:text-[96px]">
               The duality of an<span className="whitespace-nowrap"><GlobeO accent={accent} />ptimist</span><span style={{ color: accent }}>.</span>
             </h1>
-            {/* cloud — sits under the duality line, extends down so okiela appears to fall from it */}
+            {/* cloud — sits under the duality line */}
             <DropCloud />
           </div>
 
@@ -1533,10 +1533,9 @@ function DropCloud() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute -bottom-16 left-0 z-0 h-36 w-full max-w-5xl sm:-bottom-20 sm:h-44 lg:-bottom-24 lg:h-52"
+      className="pointer-events-none absolute -bottom-12 left-0 z-0 h-36 w-full max-w-5xl sm:-bottom-16 sm:h-44 lg:-bottom-20 lg:h-52"
       style={{
         animation: "cloud-drift 18s ease-in-out infinite",
-        filter: "blur(1px)",
       }}
     >
       <svg
@@ -1544,61 +1543,26 @@ function DropCloud() {
         preserveAspectRatio="xMinYMid meet"
         className="h-full w-full"
       >
-        <defs>
-          <radialGradient id="cloud-body" cx="50%" cy="40%" r="65%">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.7" />
-            <stop offset="55%" stopColor="#ffffff" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-          </radialGradient>
-          <radialGradient id="cloud-shade" cx="50%" cy="70%" r="55%">
-            <stop offset="0%" stopColor="#a8b0bf" stopOpacity="0.2" />
-            <stop offset="100%" stopColor="#a8b0bf" stopOpacity="0" />
-          </radialGradient>
-          <filter id="cloud-blur" x="-10%" y="-10%" width="120%" height="120%">
-            <feGaussianBlur stdDeviation="10" />
-          </filter>
-        </defs>
-        {/* soft cool-grey underbelly */}
-        <g filter="url(#cloud-blur)">
-          <ellipse cx="240" cy="130" rx="170" ry="70" fill="url(#cloud-shade)" />
-          <ellipse cx="460" cy="138" rx="200" ry="80" fill="url(#cloud-shade)" />
-          <ellipse cx="680" cy="132" rx="180" ry="72" fill="url(#cloud-shade)" />
-        </g>
-        {/* cloud body — soft white puffs (shifted left) */}
-        <g fill="url(#cloud-body)">
-          <ellipse cx="60" cy="138" rx="120" ry="50" />
-          <ellipse cx="240" cy="100" rx="160" ry="68" />
-          <ellipse cx="440" cy="92" rx="170" ry="72" />
-          <ellipse cx="640" cy="100" rx="170" ry="68" />
-          <ellipse cx="820" cy="120" rx="150" ry="60" />
-          <ellipse cx="940" cy="146" rx="110" ry="44" />
-          <ellipse cx="460" cy="156" rx="420" ry="36" />
-        </g>
-        {/* sketch shading — soft outline contour lines along the puffs */}
-        <g fill="none" stroke="#8e95a6" strokeWidth="0.7" opacity="0.45" strokeLinecap="round">
-          <path d="M30 156 Q140 90 280 78 Q420 64 540 76 Q680 90 820 90 Q920 92 980 110" />
-          <path d="M120 168 Q230 132 360 124 Q500 116 620 128 Q740 138 860 138" opacity="0.7" />
-          <path d="M180 178 Q300 162 440 158 Q580 158 720 160 Q820 162 880 170" opacity="0.55" />
-        </g>
-        {/* hand-drawn shading hatches below */}
-        <g stroke="#8e95a6" strokeWidth="0.6" opacity="0.28" strokeLinecap="round">
-          <line x1="220" y1="172" x2="260" y2="186" />
-          <line x1="280" y1="170" x2="320" y2="186" />
-          <line x1="340" y1="170" x2="380" y2="186" />
-          <line x1="400" y1="170" x2="440" y2="186" />
-          <line x1="460" y1="172" x2="500" y2="188" />
-          <line x1="520" y1="172" x2="560" y2="188" />
-          <line x1="580" y1="172" x2="620" y2="188" />
-          <line x1="640" y1="174" x2="680" y2="190" />
-          <line x1="700" y1="172" x2="740" y2="188" />
-        </g>
-        {/* soft highlights along the top edge */}
-        <g fill="#ffffff" opacity="0.55">
-          <ellipse cx="220" cy="74" rx="70" ry="14" />
-          <ellipse cx="430" cy="66" rx="90" ry="14" />
-          <ellipse cx="640" cy="76" rx="80" ry="14" />
-          <ellipse cx="810" cy="94" rx="56" ry="12" />
-        </g>
+        {/* transparent cloud — outline only, single puffy silhouette */}
+        <path
+          d="M 30 154
+             C -10 148, 0 100, 50 88
+             C 70 42, 150 28, 210 62
+             C 250 14, 370 10, 410 52
+             C 460 -8, 610 -10, 660 50
+             C 710 6, 820 12, 860 60
+             C 905 30, 985 36, 1020 80
+             C 1055 112, 1085 134, 1060 154
+             C 1010 174, 800 178, 600 178
+             C 400 178, 200 174, 30 154
+             Z"
+          fill="none"
+          stroke="var(--muted-foreground)"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          opacity="0.55"
+        />
       </svg>
     </div>
   );

@@ -225,6 +225,13 @@
   50% { transform: translateX(8px) scale(1.02); }
 }
 
+@keyframes rain-fall {
+  0% { transform: translateY(-30px); opacity: 0; }
+  12% { opacity: var(--peak-opacity, 0.5); }
+  88% { opacity: var(--peak-opacity, 0.5); }
+  100% { transform: translateY(440px); opacity: 0; }
+}
+
 @keyframes letter-drop {
   0% {
     transform: translateY(var(--start, -260px)) rotateZ(var(--tilt-start, -20deg)) rotateX(55deg);
