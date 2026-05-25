@@ -420,16 +420,18 @@ function Index() {
           </div>
 
           {/* main display: "The Duality Of An Optimist" — directly from PDF cover */}
-          <h1 className="mt-10 max-w-5xl font-serif text-[11vw] leading-[0.95] tracking-tight sm:text-[64px] md:text-[76px] lg:text-[96px]">
-            The duality of an<span className="whitespace-nowrap"><GlobeO accent={accent} />ptimist</span><span style={{ color: accent }}>.</span>
-          </h1>
+          <div className="relative mt-10">
+            <h1 className="relative z-10 max-w-5xl font-serif text-[11vw] leading-[0.95] tracking-tight sm:text-[64px] md:text-[76px] lg:text-[96px]">
+              The duality of an<span className="whitespace-nowrap"><GlobeO accent={accent} />ptimist</span><span style={{ color: accent }}>.</span>
+            </h1>
+            {/* cloud — sits under the duality line, extends down so okiela appears to fall from it */}
+            <DropCloud />
+          </div>
 
           {/* two-column intro — okiela. sketch wordmark + right column copy */}
           <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
             <div className="lg:col-span-7">
               <div className="relative">
-                {/* soft cloud beneath the headline — letters appear to fall from it */}
-                <DropCloud />
                 <h2
                   className="relative font-sketch text-[22vw] leading-[0.85] sm:text-[140px] lg:text-[180px]"
                   style={{ perspective: "1400px", transformStyle: "preserve-3d" }}
@@ -1531,45 +1533,48 @@ function DropCloud() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute -top-6 left-2 right-2 z-0 h-24 opacity-90 sm:-top-8 sm:h-32 lg:-top-10 lg:h-40"
-      style={{ animation: "cloud-drift 14s ease-in-out infinite" }}
+      className="pointer-events-none absolute -bottom-24 left-0 right-0 z-0 h-44 opacity-40 sm:-bottom-32 sm:h-56 lg:-bottom-40 lg:h-64"
+      style={{
+        animation: "cloud-drift 16s ease-in-out infinite",
+        filter: "blur(2px)",
+      }}
     >
       <svg
-        viewBox="0 0 600 140"
-        preserveAspectRatio="none"
+        viewBox="0 0 1200 240"
+        preserveAspectRatio="xMidYMid meet"
         className="h-full w-full"
       >
         <defs>
-          <radialGradient id="cloud-fill" cx="50%" cy="40%" r="60%">
-            <stop offset="0%" stopColor="var(--background)" stopOpacity="1" />
-            <stop offset="60%" stopColor="var(--background)" stopOpacity="0.85" />
+          <radialGradient id="cloud-fill" cx="50%" cy="40%" r="65%">
+            <stop offset="0%" stopColor="var(--background)" stopOpacity="0.7" />
+            <stop offset="55%" stopColor="var(--background)" stopOpacity="0.5" />
             <stop offset="100%" stopColor="var(--background)" stopOpacity="0" />
           </radialGradient>
           <filter id="cloud-blur" x="-10%" y="-10%" width="120%" height="120%">
-            <feGaussianBlur stdDeviation="6" />
+            <feGaussianBlur stdDeviation="14" />
           </filter>
         </defs>
-        {/* soft shadow halo */}
-        <g filter="url(#cloud-blur)" opacity="0.35">
-          <ellipse cx="120" cy="80" rx="80" ry="38" fill="var(--muted-foreground)" />
-          <ellipse cx="220" cy="60" rx="110" ry="48" fill="var(--muted-foreground)" />
-          <ellipse cx="340" cy="64" rx="95" ry="42" fill="var(--muted-foreground)" />
-          <ellipse cx="460" cy="78" rx="90" ry="40" fill="var(--muted-foreground)" />
+        {/* very soft shadow halo */}
+        <g filter="url(#cloud-blur)" opacity="0.16">
+          <ellipse cx="420" cy="106" rx="170" ry="70" fill="var(--muted-foreground)" />
+          <ellipse cx="640" cy="110" rx="180" ry="74" fill="var(--muted-foreground)" />
+          <ellipse cx="860" cy="118" rx="160" ry="68" fill="var(--muted-foreground)" />
         </g>
         {/* cloud body */}
         <g fill="url(#cloud-fill)">
-          <ellipse cx="110" cy="76" rx="70" ry="30" />
-          <ellipse cx="200" cy="56" rx="92" ry="40" />
-          <ellipse cx="310" cy="58" rx="86" ry="36" />
-          <ellipse cx="420" cy="68" rx="92" ry="38" />
-          <ellipse cx="500" cy="80" rx="68" ry="28" />
-          <ellipse cx="260" cy="82" rx="180" ry="22" />
+          <ellipse cx="200" cy="138" rx="120" ry="50" />
+          <ellipse cx="380" cy="100" rx="160" ry="68" />
+          <ellipse cx="580" cy="92" rx="170" ry="72" />
+          <ellipse cx="780" cy="100" rx="170" ry="68" />
+          <ellipse cx="960" cy="120" rx="150" ry="60" />
+          <ellipse cx="1080" cy="146" rx="110" ry="44" />
+          <ellipse cx="600" cy="156" rx="420" ry="36" />
         </g>
-        {/* highlights */}
-        <g fill="var(--background)" opacity="0.85">
-          <ellipse cx="180" cy="44" rx="40" ry="14" />
-          <ellipse cx="320" cy="46" rx="48" ry="14" />
-          <ellipse cx="430" cy="56" rx="36" ry="12" />
+        {/* light wisps along the top */}
+        <g fill="var(--background)" opacity="0.4">
+          <ellipse cx="350" cy="76" rx="70" ry="14" />
+          <ellipse cx="560" cy="68" rx="90" ry="14" />
+          <ellipse cx="770" cy="78" rx="80" ry="14" />
         </g>
       </svg>
     </div>
