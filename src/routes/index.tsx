@@ -61,13 +61,13 @@ const availableFor = [
   "Aureacove commissions",
 ];
 
-const okielaLetters: { c: string; drop: number; tilt: number }[] = [
-  { c: "o", drop: 150, tilt: -24 },
-  { c: "k", drop: 180, tilt: 28 },
-  { c: "i", drop: 130, tilt: -42 },
-  { c: "e", drop: 200, tilt: 32 },
-  { c: "l", drop: 160, tilt: -14 },
-  { c: "a", drop: 175, tilt: 26 },
+const okielaLetters: { c: string; start: number; tilt: number }[] = [
+  { c: "o", start: 520, tilt: -22 },
+  { c: "k", start: 600, tilt: 28 },
+  { c: "i", start: 480, tilt: -38 },
+  { c: "e", start: 660, tilt: 34 },
+  { c: "l", start: 540, tilt: -14 },
+  { c: "a", start: 580, tilt: 26 },
 ];
 
 type Project = {
@@ -421,30 +421,38 @@ function Index() {
           {/* two-column intro — okiela. sketch wordmark + right column copy */}
           <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
             <div className="lg:col-span-7">
-              <h2 className="font-sketch text-[22vw] leading-[0.85] sm:text-[140px] lg:text-[180px]">
+              <h2
+                className="font-sketch text-[22vw] leading-[0.85] sm:text-[140px] lg:text-[180px]"
+                style={{ perspective: "1400px", transformStyle: "preserve-3d" }}
+              >
                 {okielaLetters.map((L, i) => (
                   <span
                     key={i}
-                    className="inline-block"
+                    className="inline-block will-change-transform"
                     style={{
-                      animation: "letter-crumble 11s ease-in-out infinite",
-                      animationDelay: `${i * 0.08}s`,
+                      animation: "letter-drop 12s cubic-bezier(0.4, 0, 0.2, 1) infinite",
+                      animationDelay: `${i * 0.09}s`,
                       transformOrigin: "50% 60%",
-                      ["--drop" as string]: `${L.drop}px`,
-                      ["--tilt" as string]: `${L.tilt}deg`,
+                      transformStyle: "preserve-3d",
+                      backfaceVisibility: "hidden",
+                      ["--start" as string]: `-${L.start}px`,
+                      ["--tilt-start" as string]: `${L.tilt}deg`,
                     }}
                   >
                     {L.c}
                   </span>
                 ))}
                 <span
-                  className="inline-block transition-colors duration-300"
+                  className="inline-block transition-colors duration-300 will-change-transform"
                   style={{
                     color: accent,
-                    animation: "letter-crumble 11s ease-in-out infinite",
-                    animationDelay: "0.56s",
-                    ["--drop" as string]: "220px",
-                    ["--tilt" as string]: "210deg",
+                    animation: "letter-drop 12s cubic-bezier(0.4, 0, 0.2, 1) infinite",
+                    animationDelay: "0.6s",
+                    transformOrigin: "50% 60%",
+                    transformStyle: "preserve-3d",
+                    backfaceVisibility: "hidden",
+                    ["--start" as string]: "-720px",
+                    ["--tilt-start" as string]: "210deg",
                   }}
                 >
                   .

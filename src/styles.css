@@ -220,25 +220,50 @@
   to { opacity: 1; transform: scale(1); }
 }
 
-@keyframes letter-crumble {
-  0%, 22% {
-    transform: translateY(0) rotate(0deg);
+@keyframes letter-drop {
+  0% {
+    transform: translateY(var(--start, -520px)) rotateZ(var(--tilt-start, -25deg)) rotateX(55deg);
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  18% {
+    transform: translateY(calc(var(--start, -520px) * 0.82))
+      rotateZ(calc(var(--tilt-start, -25deg) * 0.78))
+      rotateX(44deg);
+    opacity: 1;
+  }
+  32% {
+    transform: translateY(calc(var(--start, -520px) * 0.5))
+      rotateZ(calc(var(--tilt-start, -25deg) * 0.5))
+      rotateX(28deg);
     opacity: 1;
   }
   44% {
-    transform: translateY(var(--drop, 150px)) rotate(var(--tilt, 30deg));
-    opacity: 0;
-  }
-  58% {
-    transform: translateY(var(--drop, 150px)) rotate(var(--tilt, 30deg));
-    opacity: 0;
-  }
-  74% {
-    transform: translateY(-6px) rotate(calc(var(--tilt, 30deg) * -0.04));
+    transform: translateY(calc(var(--start, -520px) * 0.18))
+      rotateZ(calc(var(--tilt-start, -25deg) * 0.18))
+      rotateX(12deg);
     opacity: 1;
   }
-  84%, 100% {
-    transform: translateY(0) rotate(0deg);
+  52% {
+    transform: translateY(12px) rotateZ(2deg) rotateX(4deg);
     opacity: 1;
+  }
+  57% {
+    transform: translateY(-3px) rotateZ(-0.8deg) rotateX(-1deg);
+    opacity: 1;
+  }
+  62%, 82% {
+    transform: translateY(0) rotateZ(0deg) rotateX(0deg);
+    opacity: 1;
+  }
+  94% {
+    transform: translateY(0) rotateZ(0deg) rotateX(0deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(var(--start, -520px)) rotateZ(var(--tilt-start, -25deg)) rotateX(55deg);
+    opacity: 0;
   }
 }
