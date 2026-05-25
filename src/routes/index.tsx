@@ -1479,57 +1479,14 @@ function BuildingBlocks() {
 }
 
 function Dualities() {
-  const pairs: { a: string; b: string; color: string }[] = [
-    { a: "art", b: "biology", color: "var(--accent-tomato)" },
-    { a: "loud belief", b: "quiet method", color: "var(--forest)" },
-    { a: "poster", b: "field note", color: "var(--navy)" },
-    { a: "maker's hand", b: "observer's eye", color: "var(--maroon)" },
-    { a: "make", b: "observe", color: "var(--pink-ink)" },
-  ];
   return (
-    <div className="max-w-md">
-      <div className="flex items-center gap-2.5">
-        <span className="h-1.5 w-1.5 rounded-full bg-accent-tomato" />
-        <span className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-          a few dualities
-        </span>
-      </div>
-      <ul className="mt-5 space-y-2.5">
-        {pairs.map(({ a, b, color }) => (
-          <li
-            key={a}
-            className="grid grid-cols-[1fr_auto_1fr] items-baseline gap-3 text-foreground"
-          >
-            <span className="font-serif text-base sm:text-lg">{a}</span>
-            <DualityArrow color={color} />
-            <span className="font-sketch text-lg sm:text-xl" style={{ color }}>{b}</span>
-          </li>
-        ))}
-      </ul>
+    <div className="max-w-sm">
+      <p className="font-serif text-2xl leading-snug text-foreground/85 sm:text-3xl lg:text-4xl">
+        Two minds.
+        <br />
+        <span className="text-accent-tomato">One hand.</span>
+      </p>
     </div>
-  );
-}
-
-function DualityArrow({ color }: { color: string }) {
-  return (
-    <svg width="42" height="12" viewBox="0 0 42 12" aria-hidden className="shrink-0">
-      <path
-        d="M2 6 Q12 1 22 6 T40 6"
-        fill="none"
-        stroke={color}
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        opacity="0.75"
-      />
-      <path
-        d="M40 6 L34 2 M40 6 L34 10"
-        fill="none"
-        stroke={color}
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        opacity="0.75"
-      />
-    </svg>
   );
 }
 
