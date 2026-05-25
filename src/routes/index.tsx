@@ -61,6 +61,15 @@ const availableFor = [
   "Aureacove commissions",
 ];
 
+const okielaLetters: { c: string; drop: number; tilt: number }[] = [
+  { c: "o", drop: 150, tilt: -24 },
+  { c: "k", drop: 180, tilt: 28 },
+  { c: "i", drop: 130, tilt: -42 },
+  { c: "e", drop: 200, tilt: 32 },
+  { c: "l", drop: 160, tilt: -14 },
+  { c: "a", drop: 175, tilt: 26 },
+];
+
 type Project = {
   no: string;
   palette: Palette;
@@ -413,8 +422,31 @@ function Index() {
           <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
             <div className="lg:col-span-7">
               <h2 className="font-sketch text-[22vw] leading-[0.85] sm:text-[140px] lg:text-[180px]">
-                okiela
-                <span className="transition-colors duration-300" style={{ color: accent }}>
+                {okielaLetters.map((L, i) => (
+                  <span
+                    key={i}
+                    className="inline-block"
+                    style={{
+                      animation: "letter-crumble 11s ease-in-out infinite",
+                      animationDelay: `${i * 0.08}s`,
+                      transformOrigin: "50% 60%",
+                      ["--drop" as string]: `${L.drop}px`,
+                      ["--tilt" as string]: `${L.tilt}deg`,
+                    }}
+                  >
+                    {L.c}
+                  </span>
+                ))}
+                <span
+                  className="inline-block transition-colors duration-300"
+                  style={{
+                    color: accent,
+                    animation: "letter-crumble 11s ease-in-out infinite",
+                    animationDelay: "0.56s",
+                    ["--drop" as string]: "220px",
+                    ["--tilt" as string]: "210deg",
+                  }}
+                >
                   .
                 </span>
               </h2>

@@ -219,3 +219,26 @@
   from { opacity: 0; transform: scale(0.94); }
   to { opacity: 1; transform: scale(1); }
 }
+
+@keyframes letter-crumble {
+  0%, 22% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  44% {
+    transform: translateY(var(--drop, 150px)) rotate(var(--tilt, 30deg));
+    opacity: 0;
+  }
+  58% {
+    transform: translateY(var(--drop, 150px)) rotate(var(--tilt, 30deg));
+    opacity: 0;
+  }
+  74% {
+    transform: translateY(-6px) rotate(calc(var(--tilt, 30deg) * -0.04));
+    opacity: 1;
+  }
+  84%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+}
