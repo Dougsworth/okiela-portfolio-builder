@@ -1533,10 +1533,10 @@ function DropCloud() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute -bottom-24 left-0 right-0 z-0 h-44 opacity-40 sm:-bottom-32 sm:h-56 lg:-bottom-40 lg:h-64"
+      className="pointer-events-none absolute -bottom-20 left-0 right-0 z-0 h-44 sm:-bottom-28 sm:h-56 lg:-bottom-36 lg:h-64"
       style={{
-        animation: "cloud-drift 16s ease-in-out infinite",
-        filter: "blur(2px)",
+        animation: "cloud-drift 18s ease-in-out infinite",
+        filter: "blur(1px)",
       }}
     >
       <svg
@@ -1545,23 +1545,27 @@ function DropCloud() {
         className="h-full w-full"
       >
         <defs>
-          <radialGradient id="cloud-fill" cx="50%" cy="40%" r="65%">
-            <stop offset="0%" stopColor="var(--background)" stopOpacity="0.7" />
-            <stop offset="55%" stopColor="var(--background)" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="var(--background)" stopOpacity="0" />
+          <radialGradient id="cloud-body" cx="50%" cy="40%" r="65%">
+            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
+            <stop offset="55%" stopColor="#ffffff" stopOpacity="0.7" />
+            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="cloud-shade" cx="50%" cy="70%" r="55%">
+            <stop offset="0%" stopColor="#a8b0bf" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#a8b0bf" stopOpacity="0" />
           </radialGradient>
           <filter id="cloud-blur" x="-10%" y="-10%" width="120%" height="120%">
-            <feGaussianBlur stdDeviation="14" />
+            <feGaussianBlur stdDeviation="10" />
           </filter>
         </defs>
-        {/* very soft shadow halo */}
-        <g filter="url(#cloud-blur)" opacity="0.16">
-          <ellipse cx="420" cy="106" rx="170" ry="70" fill="var(--muted-foreground)" />
-          <ellipse cx="640" cy="110" rx="180" ry="74" fill="var(--muted-foreground)" />
-          <ellipse cx="860" cy="118" rx="160" ry="68" fill="var(--muted-foreground)" />
+        {/* soft cool-grey underbelly so the cloud reads against cream */}
+        <g filter="url(#cloud-blur)">
+          <ellipse cx="380" cy="130" rx="170" ry="70" fill="url(#cloud-shade)" />
+          <ellipse cx="600" cy="138" rx="200" ry="80" fill="url(#cloud-shade)" />
+          <ellipse cx="820" cy="132" rx="180" ry="72" fill="url(#cloud-shade)" />
         </g>
-        {/* cloud body */}
-        <g fill="url(#cloud-fill)">
+        {/* cloud body — soft white puffs */}
+        <g fill="url(#cloud-body)">
           <ellipse cx="200" cy="138" rx="120" ry="50" />
           <ellipse cx="380" cy="100" rx="160" ry="68" />
           <ellipse cx="580" cy="92" rx="170" ry="72" />
@@ -1570,11 +1574,12 @@ function DropCloud() {
           <ellipse cx="1080" cy="146" rx="110" ry="44" />
           <ellipse cx="600" cy="156" rx="420" ry="36" />
         </g>
-        {/* light wisps along the top */}
-        <g fill="var(--background)" opacity="0.4">
-          <ellipse cx="350" cy="76" rx="70" ry="14" />
-          <ellipse cx="560" cy="68" rx="90" ry="14" />
-          <ellipse cx="770" cy="78" rx="80" ry="14" />
+        {/* bright highlights along the top edge */}
+        <g fill="#ffffff" opacity="0.85">
+          <ellipse cx="350" cy="74" rx="70" ry="14" />
+          <ellipse cx="560" cy="66" rx="90" ry="14" />
+          <ellipse cx="770" cy="76" rx="80" ry="14" />
+          <ellipse cx="940" cy="94" rx="56" ry="12" />
         </g>
       </svg>
     </div>
