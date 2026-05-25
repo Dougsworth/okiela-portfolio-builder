@@ -887,19 +887,19 @@ function ProjectModal({
       className="fixed inset-0 z-50 overflow-y-auto bg-foreground/85 backdrop-blur-sm"
       style={{ animation: "fade-in 240ms ease-out" }}
     >
-      <div className="flex min-h-full items-start justify-center p-3 sm:p-6 lg:p-10">
+      <div className="flex min-h-full items-start justify-center p-2 sm:p-6 lg:p-10">
         <article
           onClick={stop}
-          className="relative w-full max-w-5xl overflow-hidden rounded-[16px] bg-background text-foreground shadow-2xl"
+          className="relative w-full max-w-5xl overflow-hidden rounded-[14px] bg-background text-foreground shadow-2xl"
           style={{ animation: "lightbox-zoom 360ms cubic-bezier(0.2,0.7,0.2,1)" }}
         >
           {/* Top bar */}
-          <div className="hairline-b sticky top-0 z-10 flex items-center justify-between gap-3 bg-background/95 px-5 py-3 backdrop-blur-md sm:px-7">
-            <div className="flex items-center gap-2.5 text-[10px] uppercase tracking-[0.22em] text-muted-foreground tabular-nums">
-              <span className={`h-2 w-2 rounded-full ${tilePaletteBg[project.palette]}`} />
-              <span>No. {project.no}</span>
-              <span aria-hidden>·</span>
-              <span>{project.category}</span>
+          <div className="hairline-b sticky top-0 z-10 flex items-center justify-between gap-2 bg-background/95 px-4 py-3 backdrop-blur-md sm:px-7">
+            <div className="flex min-w-0 items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-muted-foreground tabular-nums sm:gap-2.5">
+              <span className={`h-2 w-2 shrink-0 rounded-full ${tilePaletteBg[project.palette]}`} />
+              <span className="shrink-0">No. {project.no}</span>
+              <span aria-hidden className="hidden sm:inline">·</span>
+              <span className="truncate hidden sm:inline">{project.category}</span>
             </div>
             <div className="flex items-center gap-1.5">
               <button
@@ -936,20 +936,20 @@ function ProjectModal({
           </div>
 
           {/* Body */}
-          <div className="px-5 py-10 sm:px-10 sm:py-14 lg:px-16 lg:py-20">
-            <p className="font-sketch text-lg text-muted-foreground">{project.year}</p>
-            <h1 className="mt-3 font-serif text-4xl leading-[0.98] tracking-tight sm:text-5xl lg:text-6xl">
+          <div className="px-5 py-8 sm:px-10 sm:py-14 lg:px-16 lg:py-20">
+            <p className="font-sketch text-base text-muted-foreground sm:text-lg">{project.year}</p>
+            <h1 className="mt-3 font-serif text-3xl leading-[0.98] tracking-tight sm:text-5xl lg:text-6xl">
               {project.name}
             </h1>
-            <p className="mt-6 max-w-3xl font-serif text-xl leading-snug text-foreground/85 sm:text-2xl">
+            <p className="mt-5 max-w-3xl font-serif text-lg leading-snug text-foreground/85 sm:mt-6 sm:text-2xl">
               {project.tagline}
             </p>
 
-            {/* Hero visual */}
-            <div
-              className={`mt-12 relative aspect-[16/9] overflow-hidden rounded-[12px] ${tilePaletteBg[project.palette]} ${tilePaletteInk[project.palette]}`}
-            >
-              <div className="absolute inset-0 scale-[1.2]">
+            {/* Hero visual — tile presented inside a stage at its natural 3:4 */}
+            <div className="mt-10 flex items-center justify-center rounded-[12px] bg-secondary p-6 sm:mt-12 sm:p-10 lg:p-16">
+              <div
+                className={`relative aspect-[3/4] w-full max-w-[260px] overflow-hidden rounded-[8px] shadow-xl sm:max-w-xs lg:max-w-sm ${tilePaletteBg[project.palette]} ${tilePaletteInk[project.palette]}`}
+              >
                 <Tile />
               </div>
             </div>
@@ -973,8 +973,8 @@ function ProjectModal({
 
             {/* Gallery */}
             {project.images && project.images.length > 0 && (
-              <div className="mt-16">
-                <div className="flex items-baseline justify-between">
+              <div className="mt-14 sm:mt-16">
+                <div className="flex items-baseline justify-between gap-3">
                   <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
                     Selected imagery
                   </p>
@@ -1007,16 +1007,16 @@ function ProjectModal({
             )}
 
             {/* CTA */}
-            <div className="hairline-t mt-16 grid grid-cols-1 gap-6 pt-10 sm:grid-cols-12 sm:items-end">
+            <div className="hairline-t mt-14 grid grid-cols-1 gap-6 pt-10 sm:mt-16 sm:grid-cols-12 sm:items-end">
               <div className="sm:col-span-8">
-                <p className="font-sketch text-xl text-muted-foreground">Want something like this?</p>
-                <h3 className="mt-3 font-serif text-2xl leading-tight sm:text-3xl">
+                <p className="font-sketch text-lg text-muted-foreground sm:text-xl">Want something like this?</p>
+                <h3 className="mt-3 font-serif text-xl leading-tight sm:text-3xl">
                   Send a brief and I'll suggest a shape and a price.
                 </h3>
               </div>
               <a
                 href={`${MAILTO}%20%E2%80%94%20${encodeURIComponent(project.name)}`}
-                className="hairline inline-flex items-center justify-between gap-3 rounded-[10px] bg-foreground px-5 py-3 text-sm text-background transition-opacity hover:opacity-85 sm:col-span-4"
+                className="hairline inline-flex w-full items-center justify-between gap-3 rounded-[10px] bg-foreground px-5 py-3 text-sm text-background transition-opacity hover:opacity-85 sm:col-span-4 sm:w-auto"
               >
                 <span>{project.cta}</span>
                 <ArrowRight />
