@@ -773,7 +773,7 @@ function Index() {
                   </span>
                 </button>
                 <figcaption className="mt-3 flex items-baseline justify-between gap-2 text-sm">
-                  <span className="min-w-0 truncate text-foreground">{p.caption}</span>
+                  <span className="min-w-0 text-foreground">{p.caption}</span>
                   <span className="shrink-0 text-muted-foreground">JA</span>
                 </figcaption>
               </figure>
@@ -1614,37 +1614,10 @@ function HeroProof() {
         </span>
       </p>
 
-      {/* social proof — real client logos (branding for fashion labels) */}
-      <div className="mt-7" style={reveal(0.4)}>
-        <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-          Trusted by
-        </p>
-        <div className="mt-3 flex flex-wrap items-center gap-x-7 gap-y-4">
-          <img
-            src="/clients/xodus.png"
-            alt="Xodus"
-            className="h-11 w-auto object-contain sm:h-12"
-            loading="lazy"
-          />
-          <img
-            src="/clients/fyp.png"
-            alt="#FYP"
-            className="h-10 w-auto object-contain sm:h-11"
-            loading="lazy"
-          />
-          <img
-            src="/clients/grennells.png"
-            alt="Grennell's Driving School"
-            className="h-10 w-auto object-contain sm:h-11"
-            loading="lazy"
-          />
-        </div>
-      </div>
-
       {/* availability — the thing a hiring manager is scanning for */}
       <div
-        className="hairline mt-6 inline-flex items-center gap-2 rounded-full bg-card px-3.5 py-1.5"
-        style={reveal(0.6)}
+        className="hairline mt-7 inline-flex items-center gap-2 rounded-full bg-card px-3.5 py-1.5"
+        style={reveal(0.4)}
       >
         <span className="relative flex h-2 w-2">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-forest opacity-60" />

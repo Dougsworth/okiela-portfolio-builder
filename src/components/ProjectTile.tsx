@@ -43,12 +43,11 @@ export function ProjectTile({ palette, name, category, year, children, onClick }
           {children}
         </div>
       </div>
-      <div className="mt-4 flex items-baseline justify-between gap-4">
-        <div>
-          <p className="text-sm text-foreground">{name}</p>
-          <p className="text-sm text-muted-foreground">{category}</p>
-        </div>
-        <p className="text-sm text-muted-foreground tabular-nums">{year}</p>
+      <div className="mt-4 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-sm">
+        <span className="text-foreground">{name}</span>
+        <span className="text-muted-foreground/60" aria-hidden>·</span>
+        <span className="text-muted-foreground">{category}</span>
+        <span className="ml-auto text-muted-foreground tabular-nums">{year}</span>
       </div>
     </button>
   );
