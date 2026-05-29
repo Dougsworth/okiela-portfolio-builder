@@ -1091,18 +1091,18 @@ function ProjectModal({
                   {project.images.map((src, i) => (
                     <figure
                       key={src}
-                      className={`hairline group relative aspect-[3/4] overflow-hidden rounded-[10px] ${tilePaletteBg[project.palette]}`}
+                      className="hairline group relative aspect-[3/4] overflow-hidden rounded-[10px] bg-card"
                     >
                       <img
                         src={src}
                         alt={`${project.name} reference ${i + 1}`}
                         loading="lazy"
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                        className="absolute inset-0 h-full w-full object-contain p-3 transition-transform duration-700 ease-out group-hover:scale-[1.03] sm:p-4"
                         onError={(e) => {
                           e.currentTarget.style.opacity = "0";
                         }}
                       />
-                      <span className="absolute bottom-2 left-2 rounded-full bg-background/80 px-2 py-0.5 text-[9px] uppercase tracking-[0.22em] text-foreground/70 tabular-nums backdrop-blur-sm">
+                      <span className="absolute right-2 top-2 rounded-full bg-background/85 px-2 py-0.5 text-[9px] uppercase tracking-[0.22em] text-foreground/70 tabular-nums backdrop-blur-sm">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </figure>
