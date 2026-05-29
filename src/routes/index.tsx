@@ -106,6 +106,7 @@ type Project = {
   cta: string;
   Tile: ComponentType;
   images?: string[];
+  pdf?: { href: string; label: string };
 };
 
 const U = (id: string, w = 900, q = 70) =>
@@ -213,6 +214,10 @@ const projects: Project[] = [
       "/photos/vlo-rmony.jpeg",
       "/photos/vlo-memory.jpeg",
     ],
+    pdf: {
+      href: "/labels/vlo-ma-product-labels.pdf",
+      label: "View VLO & MA label sheet (PDF)",
+    },
   },
   {
     no: "005",
@@ -982,6 +987,31 @@ function ProjectModal({
 }) {
   const stop = (e: React.MouseEvent) => e.stopPropagation();
   const Tile = project.Tile;
+  const images = project.images ?? [];
+  const [zoomIdx, setZoomIdx] = useState<number | null>(null);
+  const closeZoom = () => setZoomIdx(null);
+  const zoomPrev = () =>
+    setZoomIdx((i) => (i === null || images.length === 0 ? null : (i - 1 + images.length) % images.length));
+  const zoomNext = () =>
+    setZoomIdx((i) => (i === null || images.length === 0 ? null : (i + 1) % images.length));
+
+  useEffect(() => {
+    if (zoomIdx === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.stopImmediatePropagation();
+        closeZoom();
+      } else if (e.key === "ArrowRight") {
+        e.stopImmediatePropagation();
+        zoomNext();
+      } else if (e.key === "ArrowLeft") {
+        e.stopImmediatePropagation();
+        zoomPrev();
+      }
+    };
+    window.addEventListener("keydown", onKey, true);
+    return () => window.removeEventListener("keydown", onKey, true);
+  }, [zoomIdx, images.length]);
 
   return (
     <div
@@ -1079,19 +1109,34 @@ function ProjectModal({
             {/* Gallery */}
             {project.images && project.images.length > 0 && (
               <div className="mt-14 sm:mt-16">
-                <div className="flex items-baseline justify-between gap-3">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-2">
                   <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
                     Selected imagery
                   </p>
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground tabular-nums">
-                    {String(project.images.length).padStart(2, "0")} images
-                  </p>
+                  <div className="flex items-baseline gap-4">
+                    {project.pdf && (
+                      <a
+                        href={project.pdf.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[10px] uppercase tracking-[0.22em] text-foreground underline decoration-foreground/30 underline-offset-4 transition-opacity hover:opacity-60"
+                      >
+                        {project.pdf.label} ↗
+                      </a>
+                    )}
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground tabular-nums">
+                      {String(project.images.length).padStart(2, "0")} images
+                    </p>
+                  </div>
                 </div>
                 <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:gap-4">
                   {project.images.map((src, i) => (
-                    <figure
+                    <button
                       key={src}
-                      className="hairline group relative aspect-[3/4] overflow-hidden rounded-[10px] bg-card"
+                      type="button"
+                      onClick={() => setZoomIdx(i)}
+                      aria-label={`View ${project.name} reference ${i + 1} larger`}
+                      className="hairline group relative block aspect-[3/4] cursor-zoom-in overflow-hidden rounded-[10px] bg-card focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
                     >
                       <img
                         src={src}
@@ -1105,7 +1150,7 @@ function ProjectModal({
                       <span className="absolute right-2 top-2 rounded-full bg-background/85 px-2 py-0.5 text-[9px] uppercase tracking-[0.22em] text-foreground/70 tabular-nums backdrop-blur-sm">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                    </figure>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -1130,6 +1175,92 @@ function ProjectModal({
           </div>
         </article>
       </div>
+
+      {zoomIdx !== null && images[zoomIdx] && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${project.name} reference ${zoomIdx + 1}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            closeZoom();
+          }}
+          className="fixed inset-0 z-[60] flex flex-col items-center justify-center px-4 py-6 sm:px-8"
+          style={{
+            background: "color-mix(in oklch, var(--foreground) 92%, transparent)",
+            backdropFilter: "blur(8px)",
+            animation: "fade-in 220ms ease-out",
+          }}
+        >
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              closeZoom();
+            }}
+            aria-label="Close image"
+            className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-background/15 text-background backdrop-blur-md transition-colors hover:bg-background/25 sm:right-6 sm:top-6"
+          >
+            <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden>
+              <path d="M4 4 L16 16 M16 4 L4 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </button>
+
+          {images.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  zoomPrev();
+                }}
+                aria-label="Previous image"
+                className="absolute left-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-background/15 text-background backdrop-blur-md transition-colors hover:bg-background/25 sm:left-6"
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden>
+                  <path d="M13 4 L6 10 L13 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  zoomNext();
+                }}
+                aria-label="Next image"
+                className="absolute right-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-background/15 text-background backdrop-blur-md transition-colors hover:bg-background/25 sm:right-6"
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden>
+                  <path d="M7 4 L14 10 L7 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                </svg>
+              </button>
+            </>
+          )}
+
+          <div
+            onClick={stop}
+            className="flex max-h-[80vh] w-full max-w-5xl items-center justify-center"
+          >
+            <img
+              key={images[zoomIdx]}
+              src={images[zoomIdx]}
+              alt={`${project.name} reference ${zoomIdx + 1}`}
+              className="max-h-[80vh] w-auto max-w-full rounded-[10px] object-contain shadow-2xl"
+              style={{ animation: "lightbox-zoom 320ms cubic-bezier(0.2,0.7,0.2,1)" }}
+            />
+          </div>
+
+          <div
+            onClick={stop}
+            className="mt-4 flex items-center gap-3 text-background"
+          >
+            <span className="font-serif text-xl sm:text-2xl">{project.name}</span>
+            <span className="text-xs uppercase tracking-[0.22em] opacity-70 tabular-nums">
+              {String(zoomIdx + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
